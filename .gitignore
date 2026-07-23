@@ -5,3 +5,6 @@ out/
 next-env.d.ts
 .DS_Store
 .local-confidential/
+
+# Large raw source media — derived frames in public/ are the runtime asset
+assets-raw/*.mp4

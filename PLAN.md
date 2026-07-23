@@ -22,8 +22,18 @@ Ordered by risk descending, not pipeline order. Phase 1 is the end-to-end greybo
 
 ## Phase 3 — Real assets, chapter by chapter (IN-SESSION, `/loop` each)
 - **Risk retired:** payload/decode performance of real sequences; WebGL poly/light budgets.
-- **Entry:** `/asset` prompts rendered, files in `/assets-raw`.
-- **Exit:** chapters 1–3 running real sequences/WebGL within budget; frame loader with windowed cache.
+- **Entry:** assets in `/assets-raw`.
+- **Progress:**
+  - ✅ **Chapter 3** — real CGI construction sequence
+    (TDOMA_Presentation.mp4) decoded to 203 frames @ 1280px (~14 MB),
+    scroll-scrubbed on a DPR-capped canvas with a windowed loader
+    (`lib/sequence`). Sourced BOQ phase data overlays in sync. Coarse-pointer
+    devices get a static end-frame. Raw video kept out of git; frames
+    committed as the runtime asset.
+  - ☐ Chapter 1 (exploded assembly) — still greybox; needs a layered
+    render/model.
+  - ☐ Chapter 2 (turntable) — still greybox; needs a glTF/GLB for live WebGL.
+- **Exit:** chapters 1–3 running real sequences/WebGL within budget.
 - **Cost:** largest phase. **Delegate?** No — visual coherence and integration are never delegated.
 
 ## Phase 4 — Performance pass (IN-SESSION)
