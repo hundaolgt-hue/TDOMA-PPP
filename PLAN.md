@@ -1,0 +1,34 @@
+# PLAN — risk-ordered phases
+
+Ordered by risk descending, not pipeline order. Phase 1 is the end-to-end greybox (highest risk: scroll rhythm).
+
+## Phase 1 — End-to-end greybox (IN-SESSION) ← current
+- **Risk retired:** "can native scroll + pinned chapters feel cinematic?" — the project's make-or-break.
+- **Entry:** empty repo, stack decided (see ARCHITECTURE.md).
+- **Exit:** all 7 chapters scroll-driven with placeholder geometry, real timing, real text; chapter nav; Lenis tuned; builds statically; scrub-safe backwards; mid-page refresh correct.
+- **Cost:** ~1 session. **Delegate?** No — scroll rhythm is judgment work, never delegated.
+
+## Phase 2 — Data layer + validation (FAN OUT)
+- **Risk retired:** figures traceability; parsing `/docs-source` once populated.
+- **Entry:** greybox approved; source docs dropped in `/docs-source`.
+- **Exit:** typed `/data/*.ts` with `source` fields; `validate:data` script fails build on orphans; dashboard/BOQ read only from `/data`.
+- **Cost:** small, mechanical. **Delegate?** Yes — parsing is mechanical; schema design stays in-session.
+
+## Phase 3 — Real assets, chapter by chapter (IN-SESSION, `/loop` each)
+- **Risk retired:** payload/decode performance of real sequences; WebGL poly/light budgets.
+- **Entry:** `/asset` prompts rendered, files in `/assets-raw`.
+- **Exit:** chapters 1–3 running real sequences/WebGL within budget; frame loader with windowed cache.
+- **Cost:** largest phase. **Delegate?** No — visual coherence and integration are never delegated.
+
+## Phase 4 — Performance pass (IN-SESSION)
+- **Entry:** all assets in.
+- **Exit:** budget table measured green: JS < 250 KB gzip, LCP < 2.0 s, 60 fps scroll, 0 long tasks > 50 ms.
+- **Cost:** ~half session. **Delegate?** No — perf is cross-cutting.
+
+## Phase 5 — Polish pass (IN-SESSION)
+- **Entry:** budgets green.
+- **Exit:** load sequence with real progress, chapter-crossing transitions, hover/cursor intent, optional ambient audio toggle.
+- **Cost:** ~half session. **Delegate?** No — this is where awards are decided.
+
+## Phase 6 — Audit (`/audit`) (IN-SESSION)
+- **Exit:** every GOAL.md done-criterion PASS with evidence; pre-submission checklist green.

@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+/* Design tokens. Two type roles only: display + body (real typefaces land in
+   the asset phase; the scale and rhythm are what the greybox locks in). */
+:root {
+  --bg: #0a0c10;
+  --bg-alt: #0c0e12;
+  --ink: #f2f1ec;
+  --ink-dim: #8a8f98;
+}
+
+@theme {
+  --font-display: Georgia, "Times New Roman", serif;
+}
+
+html {
+  background: var(--bg);
+  color: var(--ink);
+  scroll-behavior: auto; /* Lenis owns smoothing; native smooth would double it */
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* Reduced motion: kill residual CSS transitions; chapters render final frames. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
