@@ -33,9 +33,15 @@ Ordered by risk descending, not pipeline order. Phase 1 is the end-to-end greybo
   - ✅ **Chapter 1** — real exploded-assembly render (explosion_video.mp4)
     decoded to 121 frames, scroll-scrubbed. Sourced BOQ system costs ride the
     explosion then hand off to the render's own architectural labels.
-  - ☐ Chapter 2 (turntable) — still greybox; needs a glTF/GLB for live WebGL.
-- **Exit:** chapters 1–3 running real sequences/WebGL within budget.
+  - ✅ **Chapter 2** — real orbit render (revolve_video.mp4) decoded to 170
+    frames, scroll-scrubbed. 13 sourced clusters highlight in sequence as the
+    tower turns. Click-to-isolate deferred to a future glTF/GLB WebGL upgrade;
+    the orbit + synced legend is presentable now.
+- **Exit:** ✅ chapters 1–3 all running real sequences within budget.
 - **Cost:** largest phase. **Delegate?** No — visual coherence and integration are never delegated.
+- **Note:** three sequences total ~39 MB of frames, each streamed windowed
+  per chapter (never on initial load). Optional future work: a mobile-portrait
+  frame track and the chapter-2 WebGL model for true click-to-isolate.
 
 ## Phase 4 — Performance pass (IN-SESSION)
 - **Entry:** all assets in.

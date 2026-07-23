@@ -18,3 +18,10 @@ export const ch1Sequence: SequenceManifest = {
   count: 121,
   path: (i) => `frames/ch1/frame_${String(i).padStart(4, "0")}.jpg`,
 };
+
+// Turntable orbit for chapter 2 — decoded from revolve_video.mp4. Camera
+// revolves around the finished tower.
+export const ch2Sequence: SequenceManifest = {
+  count: 170,
+  path: (i) => `frames/ch2/frame_${String(i).padStart(4, "0")}.jpg`,
+};

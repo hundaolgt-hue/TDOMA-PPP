@@ -1,86 +1,68 @@
 "use client";
 
-import { useState } from "react";
 import type { ChapterProps } from "@/lib/scroll/ChapterShell";
-import { win, lerp } from "@/lib/scroll/ease";
+import { win, seg, clamp01, lerp } from "@/lib/scroll/ease";
 import TextReveal from "@/components/ui/TextReveal";
+import SequenceScrubber from "@/lib/sequence/SequenceScrubber";
+import { ch2Sequence } from "@/lib/sequence/manifest";
 import { zones, totalNetGla } from "@/data/program";
-import { title, ROTATION_DEG, zoneWindow } from "./timeline";
+import { title, zoneWindow } from "./timeline";
 
 /**
- * Chapter 2 — Programmatic rotation (greybox).
- * CSS-3D stack of programme clusters stands in for the live WebGL turntable
- * (pipeline B) so rotation speed and zone-illumination order can be tuned
- * now. Legend isolation is click-state, independent of scroll. Each band's
- * height ∝ its sourced net GLA; illumination sequences through the clusters.
+ * Chapter 2 — Programmatic rotation.
+ * The real orbit render (revolve_video.mp4 → frame sequence) revolves the
+ * finished tower with scroll. The 13 sourced programme clusters highlight in
+ * sequence in the legend as the building turns — driven by the same progress
+ * value. (Click-to-isolate needs live geometry; that's the WebGL upgrade
+ * path. The footage keeps the rotation cinematic in the meantime.)
  */
 export default function Turntable({ progress }: ChapterProps) {
-  const [isolated, setIsolated] = useState<string | null>(null);
-  const rotation = lerp(-30, ROTATION_DEG, progress);
-  const maxArea = Math.max(...zones.map((z) => z.areaSqm.value));
+  // Section is 400vh → unpins at progress ≈ 0.75. Orbit across 0.03–0.72.
+  const orbitT = clamp01(seg(progress, 0.03, 0.72));
 
   return (
-    <div className="flex h-full items-center justify-center bg-[#0a0c10] text-neutral-100">
-      <div className="grid w-full max-w-6xl grid-cols-1 items-center gap-8 px-6 md:grid-cols-[1fr_340px]">
-        <div className="flex h-[70vh] items-center justify-center" style={{ perspective: "1400px" }}>
-          <div
-            className="relative flex h-[46vh] w-[min(46vw,440px)] flex-col-reverse justify-start"
-            style={{ transform: `rotateX(58deg) rotateZ(${rotation}deg)`, transformStyle: "preserve-3d", willChange: "transform" }}
-            aria-hidden
-          >
-            {zones.map((zone, i) => {
-              const w = zoneWindow(i, zones.length);
-              const lit = win(progress, w.start, w.end);
-              const dimmed = isolated !== null && isolated !== zone.id;
-              const widthPct = 40 + (zone.areaSqm.value / maxArea) * 60;
-              return (
-                <div
-                  key={zone.id}
-                  className="mx-auto rounded-[2px] border transition-opacity duration-300"
-                  style={{
-                    height: `${100 / zones.length}%`,
-                    width: `${widthPct}%`,
-                    borderColor: zone.color,
-                    backgroundColor: zone.color,
-                    opacity: dimmed ? 0.06 : lerp(0.1, 0.82, lit),
-                  }}
-                />
-              );
-            })}
-          </div>
-        </div>
+    <div className="relative h-full w-full overflow-hidden bg-[#0a0c10] text-neutral-100">
+      <SequenceScrubber
+        progress={orbitT}
+        manifest={ch2Sequence}
+        label="Liiban Smart Mall turntable — the finished tower revolves to show all elevations."
+        className="absolute inset-0 h-full w-full"
+      />
 
-        <div className="flex flex-col gap-4">
-          <TextReveal progress={progress} start={title.start} end={title.end}>
-            <h2 className="font-display text-4xl leading-tight md:text-5xl">Thirteen programmes, in the round.</h2>
-          </TextReveal>
-          <ul className="flex max-h-[52vh] flex-col gap-1 overflow-y-auto pr-1" aria-label="Programme clusters — click to isolate">
-            {zones.map((zone, i) => {
-              const w = zoneWindow(i, zones.length);
-              const lit = win(progress, w.start, w.end);
-              const active = isolated === zone.id;
-              return (
-                <li key={zone.id}>
-                  <button
-                    type="button"
-                    onClick={() => setIsolated(active ? null : zone.id)}
-                    aria-pressed={active}
-                    className="flex w-full items-center gap-3 rounded-sm border border-transparent px-2 py-1 text-left text-sm hover:border-neutral-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-300"
-                    style={{ opacity: lerp(0.3, 1, lit) }}
-                  >
-                    <span className="h-3 w-3 shrink-0 rounded-[2px]" style={{ backgroundColor: zone.color }} aria-hidden />
-                    <span className="flex-1">{zone.label}</span>
-                    <span className="text-xs tabular-nums text-neutral-500">{zone.areaSqm.value.toLocaleString()} m²</span>
-                    <span className="w-10 text-right text-[11px] tabular-nums text-neutral-600">{zone.sharePct.value}%</span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-          <p className="text-xs text-neutral-500">
-            Total net GLA {totalNetGla.value.toLocaleString()} m². Click a cluster to isolate it. Areas from the Area Allocation Matrix.
-          </p>
-        </div>
+      {/* Left scrim + title */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 bg-gradient-to-b from-black/85 via-black/40 to-transparent p-6 pb-28 md:p-10">
+        <TextReveal progress={progress} start={title.start} end={title.end}>
+          <h2 className="font-display text-4xl leading-tight md:text-5xl" style={{ textShadow: "0 2px 18px rgba(0,0,0,0.85)" }}>
+            Program, in the round.
+          </h2>
+        </TextReveal>
+      </div>
+
+      {/* Right legend rail — clusters highlight in sequence as the tower turns */}
+      <div className="absolute inset-y-0 right-0 flex w-full max-w-sm flex-col justify-center bg-gradient-to-l from-black/80 via-black/45 to-transparent p-6 pl-16 md:p-10 md:pl-20">
+        <ul className="flex flex-col gap-1.5" aria-label="Programme clusters and net GLA">
+          {zones.map((zone, i) => {
+            const w = zoneWindow(i, zones.length);
+            const lit = win(orbitT, w.start, w.end);
+            return (
+              <li key={zone.id} className="flex items-center gap-3 text-sm" style={{ opacity: lerp(0.45, 1, lit) }}>
+                <span
+                  className="h-3 w-3 shrink-0 rounded-[2px] transition-all"
+                  style={{ backgroundColor: zone.color, boxShadow: lit > 0.5 ? `0 0 12px ${zone.color}` : "none" }}
+                  aria-hidden
+                />
+                <span className="flex-1" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.9)" }}>{zone.label}</span>
+                <span className="text-xs tabular-nums text-neutral-300" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.9)" }}>
+                  {zone.areaSqm.value.toLocaleString()} m²
+                </span>
+                <span className="w-10 text-right text-[11px] tabular-nums text-neutral-400">{zone.sharePct.value}%</span>
+              </li>
+            );
+          })}
+        </ul>
+        <p className="mt-4 text-xs text-neutral-400" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.9)" }}>
+          Total net GLA {totalNetGla.value.toLocaleString()} m². Areas from the Area Allocation Matrix.
+        </p>
       </div>
     </div>
   );
