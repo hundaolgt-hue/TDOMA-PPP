@@ -68,7 +68,7 @@ export default function Page() {
 
         <footer className="flex h-[40vh] flex-col items-center justify-center gap-2 px-6 text-center text-xs text-neutral-600">
           <p>Greybox build — placeholder geometry, real timing. Figures sourced from the audited financial model, BOQ and area matrix.</p>
-          <p>ETB · IFRS · concept-stage estimates; re-measure before tender. Warehouse rent and company track record remain unsourced.</p>
+          <p>ETB · IFRS · concept-stage estimates; re-measure before tender. Basement-warehouse rent is the one figure with no sourced comparable.</p>
         </footer>
       </main>
     </SmoothScroll>

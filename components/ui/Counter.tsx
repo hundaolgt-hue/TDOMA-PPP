@@ -11,6 +11,8 @@ type Props = {
   prefix?: string;
   suffix?: string;
   className?: string;
+  /** Thousands separators — off for years and other bare identifiers. */
+  grouping?: boolean;
 };
 
 /**
@@ -26,6 +28,7 @@ export default function Counter({
   prefix = "",
   suffix = "",
   className = "",
+  grouping = true,
 }: Props) {
   const t = win(progress, start, end);
   const current = value * t;
@@ -34,6 +37,7 @@ export default function Counter({
     current.toLocaleString("en-US", {
       minimumFractionDigits: decimals,
       maximumFractionDigits: decimals,
+      useGrouping: grouping,
     }) +
     suffix;
 

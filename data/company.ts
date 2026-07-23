@@ -1,34 +1,62 @@
-import { src, todo, SRC, type Sourced } from "./types";
+import { src, SRC, type Sourced } from "./types";
 
-// Sponsor identity is sourced from the financial model's Cover sheet. A
-// dedicated company-profile document has NOT been supplied — track record,
-// team and delivered projects remain TODO_SOURCE until one is provided.
+// Sponsor identity + corporate facts — TDOMA Prospectus (Registration of
+// Existing Shares) and the audited financial model. TDOMA is a
+// development-stage company whose principal planned activity IS this project,
+// so its "track record" is a corporate-milestone timeline, not a list of
+// delivered buildings.
+
+const PROSPECTUS = "TDOMA_Prospectus_Corporate_Details.md";
+const prospectus = (loc: string) => `${PROSPECTUS} › ${loc}`;
 
 export const sponsor = {
-  name: "TDOMA S.C.",
-  project: "Liiban Smart Mall",
-  descriptor: "G+15 mixed-use trade complex · Merkato, Addis Ababa",
-  structure: "70/30 PPP with the City Government of Addis Ababa",
+  name: "TDOMA Share Company",
+  meaning: "Tokkummaa Daldaltoota Oromoo Markaatoo — “Unified Oromo Merchants in Merkato”",
+  legalForm: "Share company under Ethiopian Commercial Code Arts. 304–509",
+  headOffice: "Mexico Senga Tera Building, Addis Ketema Sub-City, Woreda 8, Addis Ababa",
+  website: "www.tdoma.com",
+  email: "info@tdoma.com",
+  structure: "70/30 PPP with the City Government of Addis Ababa (financial model basis)",
   framework: "Full IFRS (Financial Reporting Proclamation No. 847/2014, AABE)",
-  source: SRC.fin("Cover"),
+  source: prospectus("Corporate details"),
 } as const;
 
-// Sourced project facts stand in as the "track record" figures until a
-// company profile arrives — these describe THIS development, from the model.
 export const companyStats = {
-  storeys: src(15, SRC.area("p1 header: G+15")),
-  netGlaSqm: src(21004, SRC.area("p3/p4 TOTAL NET GLA")),
-  gdvEtbBn: src(16.0, SRC.fin("Dashboard › Total GDV")),
+  foundedYear: src(2019, prospectus("Registered 30 Dec 2019 G.C.")),
+  shareholders: src(91, prospectus("expanded to 91 shareholders")),
+  paidUpCapitalEtbM: src(21.7, prospectus("paid-up capital ETB 21.7 million")),
 } satisfies Record<string, Sourced<number>>;
 
-export type DeliveredProject = {
-  name: string;
-  year: Sourced<number>;
-  valueM: Sourced<number>;
-  description: string;
+export type Milestone = {
+  date: string;
+  title: string;
+  detail: string;
+  source: string;
 };
 
-// No company-profile document supplied — these remain unsourced placeholders.
-export const deliveredProjects: DeliveredProject[] = [
-  { name: "Track record pending", year: todo(2024), valueM: todo(0), description: "Awaiting the company profile document to populate delivered projects." },
+export const milestones: Milestone[] = [
+  {
+    date: "Dec 2019",
+    title: "Incorporated",
+    detail: "Ten founding shareholders formalise Merkato trading activities; initial subscribed capital ETB 10M (par ETB 1,000/share).",
+    source: prospectus("established 30 Dec 2019, ETB 10M initial capital"),
+  },
+  {
+    date: "Nov 2024",
+    title: "Strategic reset",
+    detail: "First board meeting in five years adopts new directives and MoA revisions, laying the groundwork for the development.",
+    source: prospectus("first board meeting in five years, 26 Nov 2024"),
+  },
+  {
+    date: "Jan 2026",
+    title: "Feasibility completed",
+    detail: "Feasibility study and strategic document prepared, outlining the project's core activities and development direction.",
+    source: prospectus("feasibility study + strategic document, Jan 2026"),
+  },
+  {
+    date: "Now",
+    title: "91 shareholders",
+    detail: "Paid-up capital increased to ETB 21.7M; registering existing shares. Legal land ownership not yet secured.",
+    source: prospectus("91 shareholders; land not yet secured"),
+  },
 ];
