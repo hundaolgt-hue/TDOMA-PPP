@@ -11,3 +11,10 @@ export const ch3Sequence: SequenceManifest = {
   count: 203,
   path: (i) => `frames/ch3/frame_${String(i).padStart(4, "0")}.jpg`,
 };
+
+// Exploded assembly for chapter 1 — decoded from explosion_video.mp4. Finished
+// tower → separates into labeled architectural layers.
+export const ch1Sequence: SequenceManifest = {
+  count: 121,
+  path: (i) => `frames/ch1/frame_${String(i).padStart(4, "0")}.jpg`,
+};

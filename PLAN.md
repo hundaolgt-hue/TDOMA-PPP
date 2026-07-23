@@ -30,8 +30,9 @@ Ordered by risk descending, not pipeline order. Phase 1 is the end-to-end greybo
     (`lib/sequence`). Sourced BOQ phase data overlays in sync. Coarse-pointer
     devices get a static end-frame. Raw video kept out of git; frames
     committed as the runtime asset.
-  - ☐ Chapter 1 (exploded assembly) — still greybox; needs a layered
-    render/model.
+  - ✅ **Chapter 1** — real exploded-assembly render (explosion_video.mp4)
+    decoded to 121 frames, scroll-scrubbed. Sourced BOQ system costs ride the
+    explosion then hand off to the render's own architectural labels.
   - ☐ Chapter 2 (turntable) — still greybox; needs a glTF/GLB for live WebGL.
 - **Exit:** chapters 1–3 running real sequences/WebGL within budget.
 - **Cost:** largest phase. **Delegate?** No — visual coherence and integration are never delegated.

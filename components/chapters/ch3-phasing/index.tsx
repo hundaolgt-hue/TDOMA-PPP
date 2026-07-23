@@ -35,11 +35,11 @@ export default function ConstructionPhasing({ progress }: ChapterProps) {
       />
 
       {/* Top scrim + title */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 bg-gradient-to-b from-black/70 to-transparent p-6 pb-16 md:p-10">
+      <div className="pointer-events-none absolute inset-x-0 top-0 bg-gradient-to-b from-black/85 via-black/45 to-transparent p-6 pb-28 md:p-10">
         <TextReveal progress={progress} start={title.start} end={title.end}>
-          <h2 className="font-display text-4xl leading-tight drop-shadow-lg md:text-5xl">Built, floor by floor.</h2>
+          <h2 className="font-display text-4xl leading-tight md:text-5xl" style={{ textShadow: "0 2px 18px rgba(0,0,0,0.85)" }}>Built, floor by floor.</h2>
         </TextReveal>
-        <p className="mt-2 text-sm text-neutral-300 drop-shadow" style={{ opacity: win(progress, title.start, title.end) }}>
+        <p className="mt-2 text-sm text-neutral-200" style={{ opacity: win(progress, title.start, title.end), textShadow: "0 1px 12px rgba(0,0,0,0.9)" }}>
           {constructionMonths.value} months · {(totalConstructionEtb.value / 1e9).toFixed(2)} bn ETB construction works
         </p>
       </div>
