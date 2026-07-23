@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Smart Mall — Development Proposal",
+  title: "Liiban Smart Mall — TDOMA S.C.",
   description:
-    "An interactive, scroll-driven proposal for the Smart Mall development: assembly, program, phasing, financials, and delivery track record.",
+    "An interactive, scroll-driven proposal for the Liiban Smart Mall — a G+15 mixed-use trade complex in Merkato, Addis Ababa: assembly, programme, phasing, financials and BOQ.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

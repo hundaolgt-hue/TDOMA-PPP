@@ -61,7 +61,10 @@ export default function ExplodedAssembly({ progress }: ChapterProps) {
                   className="border-l border-neutral-600 pl-4"
                   style={{ opacity: lerp(0.15, 1, t), transform: `translateY(${lerp(8, 0, t)}px)` }}
                 >
-                  <p className="text-sm font-medium">{layer.label}</p>
+                  <div className="flex items-baseline justify-between gap-3">
+                    <p className="text-sm font-medium">{layer.label}</p>
+                    <p className="text-xs tabular-nums text-neutral-500">{(layer.costEtb.value / 1e6).toFixed(0)}M ETB</p>
+                  </div>
                   <p className="text-xs text-neutral-400">{layer.callout}</p>
                 </li>
               );

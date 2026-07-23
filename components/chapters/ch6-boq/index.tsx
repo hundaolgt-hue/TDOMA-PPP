@@ -10,7 +10,7 @@ import { title, rowWindow } from "./timeline";
 
 type SortKey = "code" | "quantity" | "amount";
 
-const amount = (item: BoqItem): number => item.quantity.value * item.rateUsd.value;
+const amount = (item: BoqItem): number => item.quantity.value * item.rateEtb.value;
 
 /**
  * Chapter 6 — BOQ. Sortable, phase-filterable quantities table cross-linked
@@ -28,7 +28,7 @@ export default function Boq({ progress }: ChapterProps) {
     filtered.sort((a, b) => {
       const cmp =
         sortKey === "code"
-          ? a.code.localeCompare(b.code)
+          ? a.code.localeCompare(b.code, undefined, { numeric: true }) // B.2 before B.10
           : sortKey === "quantity"
             ? a.quantity.value - b.quantity.value
             : amount(a) - amount(b);
@@ -80,7 +80,7 @@ export default function Boq({ progress }: ChapterProps) {
 
         <div className="max-h-[52vh] overflow-y-auto overflow-x-auto">
           <table className="w-full min-w-[640px] text-sm">
-            <caption className="sr-only">Bill of quantities — placeholder figures pending source documents</caption>
+            <caption className="sr-only">Elemental bill of quantities in ETB, sourced from TDOMA_Merkato_BOQ.xlsx</caption>
             <thead className="sticky top-0 bg-[#0a0c10] text-left text-xs uppercase tracking-wider text-neutral-500">
               <tr>
                 <th scope="col" className="py-2 pr-4">
@@ -98,7 +98,7 @@ export default function Boq({ progress }: ChapterProps) {
                 <th scope="col" className="py-2 pr-4">Unit</th>
                 <th scope="col" className="py-2 text-right">
                   <button type="button" onClick={() => toggleSort("amount")} className="hover:text-neutral-200">
-                    Amount $ {sortKey === "amount" ? (descending ? "↓" : "↑") : ""}
+                    Amount ETB {sortKey === "amount" ? (descending ? "↓" : "↑") : ""}
                   </button>
                 </th>
               </tr>

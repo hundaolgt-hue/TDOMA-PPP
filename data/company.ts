@@ -1,4 +1,25 @@
-import { todo, type Sourced } from "./types";
+import { src, todo, SRC, type Sourced } from "./types";
+
+// Sponsor identity is sourced from the financial model's Cover sheet. A
+// dedicated company-profile document has NOT been supplied — track record,
+// team and delivered projects remain TODO_SOURCE until one is provided.
+
+export const sponsor = {
+  name: "TDOMA S.C.",
+  project: "Liiban Smart Mall",
+  descriptor: "G+15 mixed-use trade complex · Merkato, Addis Ababa",
+  structure: "70/30 PPP with the City Government of Addis Ababa",
+  framework: "Full IFRS (Financial Reporting Proclamation No. 847/2014, AABE)",
+  source: SRC.fin("Cover"),
+} as const;
+
+// Sourced project facts stand in as the "track record" figures until a
+// company profile arrives — these describe THIS development, from the model.
+export const companyStats = {
+  storeys: src(15, SRC.area("p1 header: G+15")),
+  netGlaSqm: src(21004, SRC.area("p3/p4 TOTAL NET GLA")),
+  gdvEtbBn: src(16.0, SRC.fin("Dashboard › Total GDV")),
+} satisfies Record<string, Sourced<number>>;
 
 export type DeliveredProject = {
   name: string;
@@ -7,15 +28,7 @@ export type DeliveredProject = {
   description: string;
 };
 
-// GREYBOX PLACEHOLDERS — replace from company profile in /docs-source.
-export const companyStats = {
-  yearsActive: todo(25),
-  projectsDelivered: todo(40),
-  totalDeliveredValueM: todo(850),
-} satisfies Record<string, Sourced<number>>;
-
+// No company-profile document supplied — these remain unsourced placeholders.
 export const deliveredProjects: DeliveredProject[] = [
-  { name: "Project placeholder A", year: todo(2019), valueM: todo(120), description: "Mixed-use development — details from company profile." },
-  { name: "Project placeholder B", year: todo(2021), valueM: todo(85), description: "Retail destination — details from company profile." },
-  { name: "Project placeholder C", year: todo(2023), valueM: todo(210), description: "Commercial complex — details from company profile." },
+  { name: "Track record pending", year: todo(2024), valueM: todo(0), description: "Awaiting the company profile document to populate delivered projects." },
 ];

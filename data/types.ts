@@ -12,3 +12,14 @@ export type Sourced<T> = {
 };
 
 export const todo = <T,>(value: T): Sourced<T> => ({ value, source: TODO_SOURCE });
+
+/** A figure traced to a real document in /docs-source. */
+export const src = <T,>(value: T, source: string): Sourced<T> => ({ value, source });
+
+// Canonical source locators (filename + sheet/page inside /docs-source).
+export const SRC = {
+  fin: (loc: string) => `TDOMA_Liiban_Financial_Model_v2_AUDITED.xlsx › ${loc}`,
+  boq: (loc: string) => `TDOMA_Merkato_BOQ.xlsx › ${loc}`,
+  area: (loc: string) => `TDOMA_Merkato_Area_Allocation_Matrix.pdf › ${loc}`,
+} as const;
+

@@ -8,11 +8,17 @@ Ordered by risk descending, not pipeline order. Phase 1 is the end-to-end greybo
 - **Exit:** all 7 chapters scroll-driven with placeholder geometry, real timing, real text; chapter nav; Lenis tuned; builds statically; scrub-safe backwards; mid-page refresh correct.
 - **Cost:** ~1 session. **Delegate?** No — scroll rhythm is judgment work, never delegated.
 
-## Phase 2 — Data layer + validation (FAN OUT)
-- **Risk retired:** figures traceability; parsing `/docs-source` once populated.
-- **Entry:** greybox approved; source docs dropped in `/docs-source`.
-- **Exit:** typed `/data/*.ts` with `source` fields; `validate:data` script fails build on orphans; dashboard/BOQ read only from `/data`.
-- **Cost:** small, mechanical. **Delegate?** Yes — parsing is mechanical; schema design stays in-session.
+## Phase 2 — Data layer + validation ✅ DONE (in-session)
+- **Risk retired:** figures traceability; parsing `/docs-source`.
+- **Delivered:** three source docs parsed (audited financial model, elemental
+  BOQ, area allocation matrix). Typed `/data/*.ts` — 238 figures carry a real
+  `source` locator (filename › sheet/page); only 3 remain TODO_SOURCE
+  (warehouse-rent comparable + company track record, both flagged unsourced by
+  the docs themselves). Every chapter reads from `/data`; nothing hardcoded.
+  Project reframed to its real identity: Liiban Smart Mall, TDOMA S.C.,
+  G+15 mixed-use trade complex, Merkato, Addis Ababa; ETB / IFRS.
+- Parsing stayed in-session rather than delegated — the schema and the
+  narrative reframing were judgment work, not mechanical extraction.
 
 ## Phase 3 — Real assets, chapter by chapter (IN-SESSION, `/loop` each)
 - **Risk retired:** payload/decode performance of real sequences; WebGL poly/light budgets.

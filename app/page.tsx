@@ -37,10 +37,10 @@ export default function Page() {
       <ChapterNav chapters={chapters} />
       <main>
         <header className="flex h-screen flex-col items-center justify-center gap-6 px-6 text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">Development proposal</p>
-          <h1 className="font-display text-6xl leading-none md:text-8xl">Smart Mall</h1>
-          <p className="max-w-md text-sm text-neutral-400">
-            A building that runs on its own nervous system. Scroll to walk through it.
+          <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">TDOMA S.C. · Development proposal</p>
+          <h1 className="font-display text-6xl leading-none md:text-8xl">Liiban Smart Mall</h1>
+          <p className="max-w-lg text-sm text-neutral-400">
+            A G+15 mixed-use trade complex for the heart of Merkato, Addis Ababa. Scroll to walk through it.
           </p>
         </header>
 
@@ -66,8 +66,9 @@ export default function Page() {
           {(p) => <Company progress={p} />}
         </ChapterShell>
 
-        <footer className="flex h-[40vh] items-center justify-center text-xs text-neutral-600">
-          Greybox build — placeholder geometry, real timing. Figures pending source documents.
+        <footer className="flex h-[40vh] flex-col items-center justify-center gap-2 px-6 text-center text-xs text-neutral-600">
+          <p>Greybox build — placeholder geometry, real timing. Figures sourced from the audited financial model, BOQ and area matrix.</p>
+          <p>ETB · IFRS · concept-stage estimates; re-measure before tender. Warehouse rent and company track record remain unsourced.</p>
         </footer>
       </main>
     </SmoothScroll>
