@@ -10,9 +10,16 @@ const BP = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const frame = (chapter: string, i: number) =>
   `${BP}/frames/${chapter}/frame_${String(i).padStart(4, "0")}.jpg`;
 
-// Construction sequence for chapter 3 — decoded from TDOMA_Presentation.mp4
-// (assets-raw) to 203 frames @ 1280px. Bare frame → MEP systems → façade →
-// finished tower.
+// Hero intro film — decoded from Intro_vid.mp4 (1080p). Resolves to the TDOMA
+// logo on its final frame.
+export const heroSequence: SequenceManifest = {
+  count: 81,
+  path: (i) => frame("hero", i),
+};
+
+// Construction sequence for S7 — decoded from construction_phase.mp4 (1080p,
+// green-themed) to 203 frames @ 1280px. Bare frame → MEP systems → finished
+// tower.
 export const ch3Sequence: SequenceManifest = {
   count: 203,
   path: (i) => frame("ch3", i),

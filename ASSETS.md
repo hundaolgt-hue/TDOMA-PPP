@@ -17,14 +17,14 @@ ffmpeg -i assets-raw/intro_1080p.mp4 -vf "fps=12,scale=1600:-2" -q:v 4 \
 
 | Section | Slot | Current placeholder | Wants (1080p) |
 |---|---|---|---|
-| S1 Hero | `heroSequence` | orbit render | **Intro film** ending on the TDOMA logo frame |
+| S1 Hero | `heroSequence` | **Intro_vid.mp4 (1080p) ✓** | done — resolves to the TDOMA logo |
 | S6 Programme | `ch1Sequence` | explosion render | **Colour-coded programme video** (zones lit ground→top) |
-| S7 Construction | `ch3Sequence` | real construction render ✓ | already the supplied video |
+| S7 Construction | `ch3Sequence` | **construction_phase.mp4 (1080p, green) ✓** | done |
 | S14 Closing | `ch2Sequence` | orbit render | **Closing film** |
 
-> Note: S1, S6 and S14 currently reuse the three supplied renders as stand-ins.
-> Give each its own manifest entry (`heroSequence`, `programSequence`,
-> `finalSequence`) when the dedicated 1080p files arrive.
+> Still awaiting: the colour-coded **programme** video (S6) and the **closing**
+> video (S14). When they arrive, give each its own manifest entry
+> (`programSequence`, `finalSequence`).
 
 ## Logo
 `components/ui/ScrollLogo.tsx` — replace the `TDOMA.` wordmark span with the

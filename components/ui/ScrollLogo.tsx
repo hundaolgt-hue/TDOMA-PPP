@@ -34,16 +34,17 @@ export default function ScrollLogo() {
       el.style.setProperty("--dock", "1");
       return;
     }
+    // The intro film already reveals the logo on its final frame; this badge
+    // simply fades in already-docked (top-left) as the hero hands off, then
+    // rides the rest of the page in minimal space.
     const st = ScrollTrigger.create({
       start: 0,
       end: () => document.body.scrollHeight,
       onUpdate: () => {
-        const vh = window.innerHeight;
-        const y = window.scrollY / vh;
+        const y = window.scrollY / window.innerHeight;
         const reveal = clamp01((y - LOGO_REVEAL_START_VH) / (LOGO_REVEAL_END_VH - LOGO_REVEAL_START_VH));
-        const dock = clamp01((y - LOGO_DOCK_START_VH) / (LOGO_DOCK_END_VH - LOGO_DOCK_START_VH));
         el.style.setProperty("--reveal", String(reveal));
-        el.style.setProperty("--dock", String(dock));
+        el.style.setProperty("--dock", "1");
       },
     });
     return () => st.kill();
