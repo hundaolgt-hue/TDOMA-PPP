@@ -29,9 +29,9 @@ jobs:
       - run: npm ci
       - name: Build static export
         env:
-          # Project pages serve under /<repo>. Change if you use a custom
-          # domain or a user/organization page (then set to empty).
-          NEXT_PUBLIC_BASE_PATH: /tdoma-ppp
+          # Project pages serve under /<repo> (case-sensitive). Change if you
+          # use a custom domain or a user/organization page (then set to empty).
+          NEXT_PUBLIC_BASE_PATH: /TDOMA-PPP
         run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
