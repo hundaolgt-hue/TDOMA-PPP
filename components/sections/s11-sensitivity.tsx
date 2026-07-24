@@ -43,15 +43,15 @@ export default function Sensitivity({ progress }: ChapterProps) {
             </div>
             <dl className="mt-6 grid grid-cols-3 gap-4">
               <div>
-                <dt className="text-[11px] uppercase tracking-wider text-[var(--dim)]">Project IRR</dt>
+                <dt className="text-sm uppercase tracking-wider text-[var(--dim)]">Project IRR</dt>
                 <dd className="font-display text-3xl font-bold text-[var(--green-deep)] 2xl:text-4xl tabular-nums">{active.irrPct.value.toFixed(1)}%</dd>
               </div>
               <div>
-                <dt className="text-[11px] uppercase tracking-wider text-[var(--dim)]">Dev. margin</dt>
+                <dt className="text-sm uppercase tracking-wider text-[var(--dim)]">Dev. margin</dt>
                 <dd className="font-display text-3xl font-bold text-[var(--green-deep)] 2xl:text-4xl tabular-nums">{(active.marginEtb.value / BN).toFixed(2)}<span className="text-lg">bn</span></dd>
               </div>
               <div>
-                <dt className="text-[11px] uppercase tracking-wider text-[var(--dim)]">Min DSCR</dt>
+                <dt className="text-sm uppercase tracking-wider text-[var(--dim)]">Min DSCR</dt>
                 <dd className="font-display text-3xl font-bold tabular-nums 2xl:text-4xl" style={{ color: breach ? "var(--orange)" : "var(--green-deep)" }}>{active.minDscr.value.toFixed(2)}×</dd>
               </div>
             </dl>
@@ -59,7 +59,7 @@ export default function Sensitivity({ progress }: ChapterProps) {
           </div>
 
           <div className="glass-strong p-6 2xl:p-8" style={{ opacity: win(progress, 0.16, 0.3) }}>
-            <p className="font-tech-label text-[11px] text-[var(--green)]">All scenarios · Project IRR vs margin</p>
+            <p className="font-tech-label text-sm text-[var(--green)]">All scenarios · Project IRR vs margin</p>
             <ul className="mt-4 flex flex-col gap-4">
               {sensitivity.map((s, i) => {
                 const t = win(progress, 0.2 + i * 0.05, 0.36 + i * 0.05);

@@ -7,75 +7,90 @@ import Counter from "@/components/ui/Counter";
 import { sponsor, companyStats, milestones } from "@/data/company";
 
 /**
- * S2 — Company profile: vision and capacity. Presented as the logo docks.
- * All facts from the TDOMA prospectus (registration of existing shares).
+ * S2 — Company profile: identity, vision, capacity and track record. All
+ * facts from the TDOMA prospectus (registration of existing shares).
  */
 export default function Company({ progress }: ChapterProps) {
   return (
-    <div className="flex h-full items-center justify-center">
-      <div className="mx-auto w-full max-w-6xl px-6 md:px-10 2xl:max-w-[1500px]">
-        <div className="glass-strong p-8 md:p-12 2xl:p-16">
-          <p className="font-tech-label text-xs text-[var(--orange)]">01 · The company</p>
-          <TextReveal progress={progress} start={0.05} end={0.18}>
-            <h2 className="font-display mt-3 text-[clamp(2.2rem,4.5vw,4.5rem)] font-bold leading-tight text-[var(--green-deep)]">
+    <div className="flex h-full items-center justify-center py-8">
+      <div className="mx-auto w-full max-w-6xl px-6 md:px-10 2xl:max-w-[1600px]">
+        <div className="holo p-8 md:p-12 2xl:p-16">
+          <p className="label text-[var(--orange)]">01 · The company</p>
+          <TextReveal progress={progress} start={0.04} end={0.16}>
+            <h2 className="font-display mt-3 text-[clamp(2.4rem,5vw,5rem)] font-bold leading-tight text-[var(--green-deep)]">
               {sponsor.name}
             </h2>
           </TextReveal>
-          <TextReveal progress={progress} start={0.1} end={0.22}>
-            <p className="mt-2 max-w-3xl text-sm text-[var(--dim)] md:text-base">{sponsor.meaning}</p>
+          <TextReveal progress={progress} start={0.09} end={0.2}>
+            <p className="mt-2 max-w-4xl text-lg text-[var(--dim)]">{sponsor.meaning}</p>
           </TextReveal>
 
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-            <div className="glass p-6">
-              <p className="font-tech-label text-[11px] text-[var(--green)]">Vision</p>
-              <p className="mt-3 text-sm leading-relaxed text-[var(--ink)] md:text-base">
-                Founded by Merkato merchants to formalise trading activities within Merkato —
-                consolidating Africa&apos;s largest open-air market into a modern, transparent,
-                digitally-run trading platform its own traders co-own.
-              </p>
+          <div className="mt-8 grid gap-6 lg:grid-cols-[1.3fr_1fr]">
+            {/* Vision + mission */}
+            <div className="flex flex-col gap-5">
+              <div className="glass p-6 2xl:p-7">
+                <p className="label text-[var(--green)]">Vision</p>
+                <p className="mt-3 text-lg leading-relaxed text-[var(--ink)]">
+                  To consolidate Africa&apos;s largest open-air market into a single, modern, digitally-run
+                  trading platform — formalising Merkato&apos;s commerce into transparent, bankable,
+                  investment-grade space that the merchants themselves co-own.
+                </p>
+              </div>
+              <div className="glass p-6 2xl:p-7">
+                <p className="label text-[var(--green)]">Mission &amp; approach</p>
+                <p className="mt-3 text-lg leading-relaxed text-[var(--ink)]">
+                  Deliver the Liiban Smart Mall as a 70/30 public-private partnership with the City
+                  Government of Addis Ababa — evidence-based, IFRS-reported, and structured to be
+                  bankable for lenders, transaction advisors and the Ethiopian Capital Market Authority.
+                </p>
+              </div>
             </div>
-            <div className="glass p-6">
-              <p className="font-tech-label text-[11px] text-[var(--green)]">Capacity</p>
-              <dl className="mt-3 grid grid-cols-3 gap-4">
+
+            {/* Capacity */}
+            <div className="holo hud p-6 2xl:p-7">
+              <p className="label text-[var(--green)]">Capacity</p>
+              <dl className="mt-4 grid grid-cols-3 gap-4">
                 <div>
-                  <dt className="text-[11px] uppercase tracking-wider text-[var(--dim)]">Founded</dt>
-                  <dd className="font-display text-3xl font-semibold text-[var(--green-deep)] 2xl:text-4xl">
+                  <dt className="text-sm uppercase tracking-wider text-[var(--dim)]">Founded</dt>
+                  <dd className="font-display text-4xl font-bold text-[var(--green-deep)]">
                     <Counter progress={progress} start={0.2} end={0.4} value={companyStats.foundedYear.value} grouping={false} />
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[11px] uppercase tracking-wider text-[var(--dim)]">Shareholders</dt>
-                  <dd className="font-display text-3xl font-semibold text-[var(--green-deep)] 2xl:text-4xl">
+                  <dt className="text-sm uppercase tracking-wider text-[var(--dim)]">Shareholders</dt>
+                  <dd className="font-display text-4xl font-bold text-[var(--green-deep)]">
                     <Counter progress={progress} start={0.2} end={0.4} value={companyStats.shareholders.value} />
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[11px] uppercase tracking-wider text-[var(--dim)]">Paid-up capital</dt>
-                  <dd className="font-display text-3xl font-semibold text-[var(--green-deep)] 2xl:text-4xl">
+                  <dt className="text-sm uppercase tracking-wider text-[var(--dim)]">Capital</dt>
+                  <dd className="font-display text-4xl font-bold text-[var(--green-deep)]">
                     <Counter progress={progress} start={0.2} end={0.4} value={companyStats.paidUpCapitalEtbM.value} decimals={1} suffix="M" />
-                    <span className="ml-1 text-sm font-medium text-[var(--dim)]">ETB</span>
                   </dd>
                 </div>
+              </dl>
+              <dl className="mt-5 flex flex-col gap-3 border-t border-[var(--green)]/15 pt-4 text-base">
+                <div className="flex justify-between gap-4"><dt className="text-[var(--dim)]">Legal form</dt><dd className="text-right font-medium text-[var(--ink)]">Share company · Arts. 304–509</dd></div>
+                <div className="flex justify-between gap-4"><dt className="text-[var(--dim)]">Structure</dt><dd className="text-right font-medium text-[var(--ink)]">70/30 PPP · Addis Ababa</dd></div>
+                <div className="flex justify-between gap-4"><dt className="text-[var(--dim)]">Head office</dt><dd className="text-right font-medium text-[var(--ink)]">Addis Ketema, Woreda 8</dd></div>
+                <div className="flex justify-between gap-4"><dt className="text-[var(--dim)]">Reporting</dt><dd className="text-right font-medium text-[var(--ink)]">Full IFRS · Procl. 847/2014</dd></div>
               </dl>
             </div>
           </div>
 
-          <ol className="mt-8 grid gap-4 md:grid-cols-4">
+          {/* Milestones */}
+          <ol className="mt-6 grid gap-4 md:grid-cols-4">
             {milestones.map((m, i) => {
-              const t = win(progress, 0.34 + i * 0.08, 0.46 + i * 0.08);
+              const t = win(progress, 0.4 + i * 0.07, 0.54 + i * 0.07);
               return (
                 <li key={m.date} className="glass p-5" style={{ opacity: t, transform: `translateY(${lerp(14, 0, t)}px)` }}>
-                  <p className="font-tech-label text-[10px] text-[var(--orange)]">{m.date}</p>
-                  <p className="font-display mt-1 text-lg font-semibold text-[var(--green-deep)]">{m.title}</p>
-                  <p className="mt-2 text-xs leading-relaxed text-[var(--dim)]">{m.detail}</p>
+                  <p className="label text-[var(--orange)]">{m.date}</p>
+                  <p className="font-display mt-1 text-xl font-semibold text-[var(--green-deep)]">{m.title}</p>
+                  <p className="mt-2 text-base leading-relaxed text-[var(--dim)]">{m.detail}</p>
                 </li>
               );
             })}
           </ol>
-
-          <p className="mt-6 text-xs text-[var(--dim)]">
-            Sourced from the TDOMA prospectus. Development-stage company; legal land ownership for the project not yet secured.
-          </p>
         </div>
       </div>
     </div>

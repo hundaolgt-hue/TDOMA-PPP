@@ -27,10 +27,17 @@
   --glass-shadow: 0 12px 48px rgba(14, 122, 82, 0.10);
 }
 
+/* Global type scale — bumped for legibility and to adapt to larger screens.
+   Everything rem-based scales with this. */
 html {
   color: var(--ink);
   scroll-behavior: auto; /* Lenis owns smoothing */
+  font-size: 17px;
 }
+@media (min-width: 1024px) { html { font-size: 18px; } }
+@media (min-width: 1536px) { html { font-size: 19.5px; } }
+@media (min-width: 1920px) { html { font-size: 21px; } }
+@media (min-width: 2560px) { html { font-size: 24px; } }
 
 body {
   font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -104,6 +111,76 @@ body {
 }
 
 .tabular-nums { font-variant-numeric: tabular-nums; }
+
+/* -------------------------------------------------------------------------
+   Sci-fi dashboard primitives (financial + data panels)
+------------------------------------------------------------------------- */
+
+/* Holographic panel: glass + green gradient hairline + soft inner glow */
+.holo {
+  position: relative;
+  background: linear-gradient(155deg, rgba(255,255,255,0.62), rgba(230,244,236,0.5));
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.8);
+  box-shadow: 0 14px 50px rgba(14,122,82,0.12), inset 0 0 30px rgba(255,255,255,0.35);
+}
+.holo::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: 20px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(14,122,82,0.55), rgba(240,138,36,0.35), transparent 60%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Faint data grid backdrop for chart panels */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(14,122,82,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14,122,82,0.06) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+/* Neon text glows */
+.neon-green { color: var(--green-deep); text-shadow: 0 0 18px rgba(14,122,82,0.35); }
+.neon-orange { color: var(--orange); text-shadow: 0 0 18px rgba(240,138,36,0.4); }
+
+/* Corner ticks — HUD framing */
+.hud { position: relative; }
+.hud::before, .hud::after {
+  content: ""; position: absolute; width: 14px; height: 14px; pointer-events: none;
+  border-color: var(--green); border-style: solid; border-width: 0;
+}
+.hud::before { top: 8px; left: 8px; border-top-width: 2px; border-left-width: 2px; }
+.hud::after { bottom: 8px; right: 8px; border-bottom-width: 2px; border-right-width: 2px; }
+
+/* Live ticker dot */
+.pulse-dot { position: relative; }
+.pulse-dot::after {
+  content: ""; position: absolute; inset: 0; border-radius: 999px;
+  box-shadow: 0 0 0 0 rgba(240,138,36,0.5);
+  animation: pulse 2.4s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(240,138,36,0.5); }
+  70% { box-shadow: 0 0 0 10px rgba(240,138,36,0); }
+  100% { box-shadow: 0 0 0 0 rgba(240,138,36,0); }
+}
+@media (prefers-reduced-motion: reduce) { .pulse-dot::after { animation: none; } }
+
+/* Utility: readable label — replaces the old sub-11px labels */
+.label {
+  font-family: "Rajdhani", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--green);
+}
 
 /* Reduced motion: kill residual CSS transitions; sections render final frames. */
 @media (prefers-reduced-motion: reduce) {

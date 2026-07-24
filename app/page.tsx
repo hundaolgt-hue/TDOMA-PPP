@@ -45,7 +45,7 @@ export default function Page() {
       <ScrollLogo />
       <main>
         {sections.map(([Comp, id, aria, h, isVideo]) => (
-          <ChapterShell key={id} id={id} heightVh={h} ariaLabel={aria} surface={!isVideo}>
+          <ChapterShell key={id} id={id} heightVh={h} ariaLabel={aria} surface={!isVideo} pin={isVideo}>
             {(p) => <Comp progress={p} />}
           </ChapterShell>
         ))}

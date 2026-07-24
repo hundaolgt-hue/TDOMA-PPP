@@ -25,7 +25,7 @@ export default function Assumptions({ progress }: ChapterProps) {
             const t = win(progress, 0.12 + gi * 0.08, 0.26 + gi * 0.08);
             return (
               <div key={group.title} className="glass-strong p-6 2xl:p-8" style={{ opacity: t, transform: `translateY(${lerp(16, 0, t)}px)` }}>
-                <p className="font-tech-label text-[11px] text-[var(--green)]">{group.title}</p>
+                <p className="font-tech-label text-sm text-[var(--green)]">{group.title}</p>
                 <dl className="mt-3 divide-y divide-[var(--green)]/10">
                   {group.items.map((it) => (
                     <div key={it.label} className="flex items-baseline justify-between gap-4 py-2">

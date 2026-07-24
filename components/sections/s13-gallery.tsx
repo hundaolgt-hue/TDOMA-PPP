@@ -36,7 +36,7 @@ export default function Gallery({ progress }: ChapterProps) {
                 style={{ opacity: t, transform: `scale(${lerp(0.94, 1, t)}) translateY(${lerp(18, 0, t)}px)`, boxShadow: "var(--glass-shadow)" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={s.src} alt={s.cap} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                <figcaption className="glass-dark absolute bottom-2 left-2 px-3 py-1 text-[11px] font-medium text-white">{s.cap}</figcaption>
+                <figcaption className="glass-dark absolute bottom-2 left-2 px-3 py-1 text-sm font-medium text-white">{s.cap}</figcaption>
               </figure>
             );
           })}

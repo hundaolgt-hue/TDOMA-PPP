@@ -36,7 +36,7 @@ export default function Hero({ progress }: ChapterProps) {
       {/* Scroll cue */}
       <div className="absolute inset-x-0 bottom-8 flex justify-center" style={{ opacity: 1 - win(progress, 0.03, 0.1) }}>
         <div className="glass px-5 py-2">
-          <span className="font-tech-label text-[10px] text-[var(--green-deep)]">Scroll ↓</span>
+          <span className="font-tech-label text-xs text-[var(--green-deep)]">Scroll ↓</span>
         </div>
       </div>
     </div>

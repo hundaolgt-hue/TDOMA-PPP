@@ -37,13 +37,13 @@ export default function PPP({ progress }: ChapterProps) {
             <p className="mt-3 text-sm text-[var(--dim)]">{ppp.tdomaContribution}</p>
             <div className="mt-4 grid grid-cols-2 gap-3">
               <div className="glass p-4">
-                <p className="text-[10px] uppercase tracking-wider text-[var(--dim)]">Equity</p>
+                <p className="text-xs uppercase tracking-wider text-[var(--dim)]">Equity</p>
                 <p className="font-display text-xl font-semibold text-[var(--green-deep)]">
                   <Counter progress={progress} start={0.2} end={0.4} value={ppp.equityEtb.value / BN} decimals={2} suffix=" bn" />
                 </p>
               </div>
               <div className="glass p-4">
-                <p className="text-[10px] uppercase tracking-wider text-[var(--dim)]">Debt (25% of cash)</p>
+                <p className="text-xs uppercase tracking-wider text-[var(--dim)]">Debt (25% of cash)</p>
                 <p className="font-display text-xl font-semibold text-[var(--green-deep)]">
                   <Counter progress={progress} start={0.2} end={0.4} value={ppp.debtEtb.value / BN} decimals={2} suffix=" bn" />
                 </p>
@@ -69,7 +69,7 @@ export default function PPP({ progress }: ChapterProps) {
             </div>
             <p className="mt-3 text-sm text-[var(--dim)]">{ppp.cityContribution}</p>
             <div className="mt-4 glass p-4">
-              <p className="text-[10px] uppercase tracking-wider text-[var(--dim)]">Land, in-kind (non-cash)</p>
+              <p className="text-xs uppercase tracking-wider text-[var(--dim)]">Land, in-kind (non-cash)</p>
               <p className="font-display text-xl font-semibold text-[var(--green-deep)]">
                 <Counter progress={progress} start={0.2} end={0.4} value={ppp.landInKindEtb.value / BN} decimals={2} suffix=" bn ETB" />
               </p>

@@ -48,7 +48,7 @@ export default function Massing({ progress }: ChapterProps) {
               return (
                 <div key={s.id} className="flex items-center gap-3" style={{ height: `${s.hPct}%` }}>
                   <div className="h-full flex-1 rounded-md" style={{ background: s.color, opacity: lerp(0.15, 0.9, t), transform: `scaleY(${lerp(0.2, 1, t)})`, transformOrigin: "bottom" }} />
-                  <span className="w-28 shrink-0 text-[11px] font-medium text-[var(--dim)]" style={{ opacity: t }}>{s.label}</span>
+                  <span className="w-28 shrink-0 text-sm font-medium text-[var(--dim)]" style={{ opacity: t }}>{s.label}</span>
                 </div>
               );
             })}
@@ -60,7 +60,7 @@ export default function Massing({ progress }: ChapterProps) {
               const t = win(progress, 0.2 + i * 0.05, 0.36 + i * 0.05);
               return (
                 <div key={m.label} className="glass p-5" style={{ opacity: t, transform: `translateY(${lerp(14, 0, t)}px)` }}>
-                  <dt className="text-[11px] uppercase tracking-wider text-[var(--dim)]">{m.label}</dt>
+                  <dt className="text-sm uppercase tracking-wider text-[var(--dim)]">{m.label}</dt>
                   <dd className="font-display mt-1 text-2xl font-semibold text-[var(--green-deep)] 2xl:text-3xl">
                     <Counter progress={progress} start={0.24} end={0.5} value={m.value} decimals={m.decimals ?? 0} suffix={m.suffix} />
                   </dd>

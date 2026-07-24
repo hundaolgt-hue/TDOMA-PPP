@@ -25,7 +25,7 @@ export default function Final({ progress }: ChapterProps) {
 
       <div className="absolute inset-0 flex items-center justify-center p-6" style={{ opacity: closeIn }}>
         <div className="glass-strong max-w-2xl p-10 text-center 2xl:p-14">
-          <p className="font-tech-label text-[11px] text-[var(--orange)]">Liiban Smart Mall</p>
+          <p className="font-tech-label text-sm text-[var(--orange)]">Liiban Smart Mall</p>
           <p className="font-display mt-3 text-4xl font-bold leading-tight text-[var(--green-deep)] md:text-5xl">
             A vertical trading city for Merkato.
           </p>
