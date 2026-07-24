@@ -68,7 +68,7 @@ export default function ChapterShell({ id, heightVh, children, ariaLabel, surfac
         ref={sectionRef}
         id={id}
         aria-label={ariaLabel}
-        className={`relative flex min-h-screen items-center py-[12vh] ${surface ? "section-bg" : ""}`}
+        className={`relative flex min-h-screen flex-col justify-center py-[12vh] ${surface ? "section-bg" : ""}`}
       >
         {children(reduced ? 1 : progress)}
       </section>

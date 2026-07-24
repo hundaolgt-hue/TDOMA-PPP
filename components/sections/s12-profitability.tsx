@@ -17,13 +17,15 @@ function Gauge({ progress, value, max, label, display, band, start, warn }: { pr
   const C = 2 * Math.PI * R;
   return (
     <div className="holo hud flex flex-col items-center p-6">
-      <svg width="150" height="150" viewBox="0 0 140 140" className="-rotate-90">
-        <circle cx="70" cy="70" r={R} fill="none" stroke="rgba(14,122,82,0.12)" strokeWidth="12" />
-        <circle cx="70" cy="70" r={R} fill="none" stroke={warn ? "var(--orange)" : "url(#gg)"} strokeWidth="12" strokeLinecap="round" strokeDasharray={C} strokeDashoffset={C * (1 - frac)} style={{ filter: "drop-shadow(0 0 6px rgba(14,122,82,0.4))" }} />
-        <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="var(--green-deep)" /><stop offset="100%" stopColor="var(--orange)" /></linearGradient></defs>
-      </svg>
-      <p className="font-display -mt-[98px] mb-[56px] text-4xl font-bold text-[var(--green-deep)]">{display}</p>
-      <p className="label text-[var(--green)]">{label}</p>
+      <div className="relative h-[132px] w-[132px]">
+        <svg viewBox="0 0 140 140" className="h-full w-full -rotate-90">
+          <circle cx="70" cy="70" r={R} fill="none" stroke="rgba(14,122,82,0.12)" strokeWidth="12" />
+          <circle cx="70" cy="70" r={R} fill="none" stroke={warn ? "var(--orange)" : "url(#gg)"} strokeWidth="12" strokeLinecap="round" strokeDasharray={C} strokeDashoffset={C * (1 - frac)} style={{ filter: "drop-shadow(0 0 6px rgba(14,122,82,0.4))" }} />
+          <defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="var(--green-deep)" /><stop offset="100%" stopColor="var(--orange)" /></linearGradient></defs>
+        </svg>
+        <span className="font-display absolute inset-0 flex items-center justify-center text-3xl font-bold text-[var(--green-deep)]">{display}</span>
+      </div>
+      <p className="label mt-4 text-[var(--green)]">{label}</p>
       <p className="mt-1 text-sm text-[var(--dim)]">{band}</p>
     </div>
   );
@@ -75,7 +77,7 @@ export default function Profitability({ progress }: ChapterProps) {
           {/* P&L waterfall (stabilised year) */}
           <div className="holo p-6">
             <p className="label text-[var(--green)]">P&amp;L bridge · stabilised year (O3) · ETB M</p>
-            <div className="relative mt-4 h-[26vh] min-h-[200px]" aria-hidden>
+            <div className="relative mt-4 h-[24vh] min-h-[190px] pb-7" aria-hidden>
               <div className="flex h-full items-stretch justify-between gap-2">
                 {plBars.map((p, i) => {
                   const t = win(progress, 0.16 + i * 0.05, 0.3 + i * 0.05);
@@ -83,32 +85,35 @@ export default function Profitability({ progress }: ChapterProps) {
                   return (
                     <div key={p.label} className="relative flex-1">
                       <div className="absolute inset-x-0.5 rounded-[3px]" style={{ top: `${p.top}%`, height: `${Math.max(1, p.h * t)}%`, background: color, opacity: 0.9 }} />
-                      <span className="absolute bottom-[-2.6rem] left-0 right-0 text-center text-xs text-[var(--dim)]">{p.label}</span>
+                      <span className="absolute inset-x-0 bottom-[-1.6rem] text-center text-[0.68rem] leading-tight text-[var(--dim)]">{p.short}</span>
                     </div>
                   );
                 })}
               </div>
             </div>
-            <p className="mt-10 text-sm text-[var(--dim)]">Revenue → EBITDA → PAT, showing every deduction. Stabilised operating year.</p>
+            <p className="mt-3 text-sm text-[var(--dim)]">Revenue → EBITDA → PAT, showing every deduction. Stabilised operating year.</p>
           </div>
 
           {/* DSCR timeline + loan */}
           <div className="holo p-6">
             <p className="label text-[var(--green)]">DSCR through the debt window · covenant 1.30×</p>
-            <div className="mt-4 flex h-[26vh] min-h-[200px] items-end justify-around gap-4">
-              {dscrByYear.map((d, i) => {
-                const t = win(progress, 0.2 + i * 0.06, 0.36 + i * 0.06);
-                const h = (d / 5) * 100 * t;
-                return (
-                  <div key={i} className="flex flex-1 flex-col items-center">
-                    <span className="font-display mb-1 text-lg font-bold tabular-nums text-[var(--green-deep)]">{d.toFixed(2)}×</span>
-                    <div className="w-full rounded-t-md" style={{ height: `${h}%`, background: d < 1.3 ? "var(--orange)" : "linear-gradient(180deg,var(--green),var(--green-deep))" }} />
-                    <span className="mt-1 text-sm text-[var(--dim)]">O{i + 1}</span>
-                  </div>
-                );
-              })}
-              <div className="relative h-full flex-[0.02]">
-                <div className="absolute inset-x-[-200px] border-t-2 border-dashed border-[var(--orange)]/60" style={{ bottom: `${(1.3 / 5) * 100}%` }} />
+            <div className="relative mt-4 h-[24vh] min-h-[190px]">
+              {/* covenant line spanning the chart */}
+              <div className="absolute inset-x-0 z-10 border-t-2 border-dashed border-[var(--orange)]/70" style={{ bottom: `${(1.3 / 5) * 100}%` }}>
+                <span className="absolute right-0 top-[-1.3rem] text-xs font-semibold text-[var(--orange)]">1.30× covenant</span>
+              </div>
+              <div className="flex h-full items-end justify-around gap-4">
+                {dscrByYear.map((d, i) => {
+                  const t = win(progress, 0.2 + i * 0.06, 0.36 + i * 0.06);
+                  const h = (d / 5) * 100 * t;
+                  return (
+                    <div key={i} className="flex h-full flex-1 flex-col items-center justify-end">
+                      <span className="font-display mb-1 text-lg font-bold tabular-nums text-[var(--green-deep)]">{d.toFixed(2)}×</span>
+                      <div className="w-full rounded-t-md" style={{ height: `${h}%`, background: d < 1.3 ? "var(--orange)" : "linear-gradient(180deg,var(--green),var(--green-deep))" }} />
+                      <span className="mt-1 text-sm text-[var(--dim)]">O{i + 1}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <div className="mt-3 grid grid-cols-3 gap-3">

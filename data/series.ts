@@ -28,14 +28,14 @@ export const loanSchedule = {
 
 // P&L waterfall at stabilised year O3 (ETB millions) — PL sheet.
 export const plO3 = [
-  { label: "Revenue", valueM: 1610, kind: "total" as const },
-  { label: "Cost of sales", valueM: 0, kind: "cost" as const },
-  { label: "Opex", valueM: -408, kind: "cost" as const },
-  { label: "EBITDA", valueM: 1203, kind: "subtotal" as const },
-  { label: "Depreciation", valueM: -102, kind: "cost" as const },
-  { label: "Finance cost", valueM: -157, kind: "cost" as const },
-  { label: "Tax", valueM: -283, kind: "cost" as const },
-  { label: "PAT", valueM: 661, kind: "total" as const },
+  { label: "Revenue", short: "Rev", valueM: 1610, kind: "total" as const },
+  { label: "Cost of sales", short: "CoS", valueM: 0, kind: "cost" as const },
+  { label: "Opex", short: "Opex", valueM: -408, kind: "cost" as const },
+  { label: "EBITDA", short: "EBITDA", valueM: 1203, kind: "subtotal" as const },
+  { label: "Depreciation", short: "Dep.", valueM: -102, kind: "cost" as const },
+  { label: "Finance cost", short: "Fin.", valueM: -157, kind: "cost" as const },
+  { label: "Tax", short: "Tax", valueM: -283, kind: "cost" as const },
+  { label: "PAT", short: "PAT", valueM: 661, kind: "total" as const },
 ];
 
 export const seriesSource = SRC.fin("PL / CashFlow / Financing sheets");
