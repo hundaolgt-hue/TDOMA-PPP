@@ -4,7 +4,11 @@
 // cannot cross the RSC boundary. Metadata lives in layout.tsx.
 import SmoothScroll from "@/lib/scroll/SmoothScroll";
 import ChapterShell from "@/lib/scroll/ChapterShell";
-import ScrollLogo from "@/components/ui/ScrollLogo";
+import dynamic from "next/dynamic";
+
+// Code-split the WebGL logo (three.js) into its own async chunk so it never
+// weighs down the initial hero load.
+const Logo3D = dynamic(() => import("@/components/ui/Logo3D"), { ssr: false });
 
 import Hero from "@/components/sections/s01-hero";
 import Company from "@/components/sections/s02-company";
@@ -42,7 +46,7 @@ const sections = [
 export default function Page() {
   return (
     <SmoothScroll>
-      <ScrollLogo />
+      <Logo3D />
       <main>
         {sections.map(([Comp, id, aria, h, isVideo]) => (
           <ChapterShell key={id} id={id} heightVh={h} ariaLabel={aria} surface={!isVideo} pin={isVideo}>
