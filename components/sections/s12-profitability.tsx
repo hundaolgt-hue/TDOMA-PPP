@@ -73,11 +73,11 @@ export default function Profitability({ progress }: ChapterProps) {
           <Gauge progress={progress} value={7.07} max={12} start={0.3} label="Payback" display={`${headline.paybackYears.value}`} band="Years · project" />
         </div>
 
-        <div className="mt-5 grid gap-5 lg:grid-cols-2">
+        <div className="mt-4 grid gap-4 lg:grid-cols-2">
           {/* P&L waterfall (stabilised year) */}
           <div className="holo p-6">
             <p className="label text-[var(--green)]">P&amp;L bridge · stabilised year (O3) · ETB M</p>
-            <div className="relative mt-4 h-[24vh] min-h-[190px] pb-7" aria-hidden>
+            <div className="relative mt-4 h-[20vh] min-h-[170px] pb-7" aria-hidden>
               <div className="flex h-full items-stretch justify-between gap-2">
                 {plBars.map((p, i) => {
                   const t = win(progress, 0.16 + i * 0.05, 0.3 + i * 0.05);
@@ -97,7 +97,7 @@ export default function Profitability({ progress }: ChapterProps) {
           {/* DSCR timeline + loan */}
           <div className="holo p-6">
             <p className="label text-[var(--green)]">DSCR through the debt window · covenant 1.30×</p>
-            <div className="relative mt-4 h-[24vh] min-h-[190px]">
+            <div className="relative mt-4 h-[20vh] min-h-[170px]">
               {/* covenant line spanning the chart */}
               <div className="absolute inset-x-0 z-10 border-t-2 border-dashed border-[var(--orange)]/70" style={{ bottom: `${(1.3 / 5) * 100}%` }}>
                 <span className="absolute right-0 top-[-1.3rem] text-xs font-semibold text-[var(--orange)]">1.30× covenant</span>
@@ -128,10 +128,10 @@ export default function Profitability({ progress }: ChapterProps) {
         </div>
 
         {/* EBIT trajectory + GDV strip */}
-        <div className="mt-5 grid gap-5 lg:grid-cols-[1.4fr_1fr]">
+        <div className="mt-4 grid gap-4 lg:grid-cols-[1.4fr_1fr]">
           <div className="holo p-6">
             <p className="label text-[var(--green)]">EBIT trajectory · ETB M · O1–O12</p>
-            <div className="mt-3"><SeriesChart data={ebitM} reveal={dscrReveal} height={170} /></div>
+            <div className="mt-3"><SeriesChart data={ebitM} reveal={dscrReveal} height={140} /></div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             {[

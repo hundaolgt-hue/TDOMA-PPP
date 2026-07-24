@@ -10,10 +10,10 @@ const BP = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const frame = (chapter: string, i: number) =>
   `${BP}/frames/${chapter}/frame_${String(i).padStart(4, "0")}.jpg`;
 
-// Hero intro film — decoded from Intro_vid.mp4 (1080p). Resolves to the TDOMA
-// logo on its final frame.
+// Hero film — decoded from Hero_video.mp4 (1080p). Branded green/white intro
+// resolving to the TDOMA logo.
 export const heroSequence: SequenceManifest = {
-  count: 81,
+  count: 91,
   path: (i) => frame("hero", i),
 };
 

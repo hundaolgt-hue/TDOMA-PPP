@@ -51,10 +51,12 @@ export default function ChapterShell({ id, heightVh, children, ariaLabel, surfac
 
     const st = ScrollTrigger.create({
       trigger: section,
-      // Pinned: progress across the section's runway. Non-pinned: progress as
-      // the section scrolls up through the viewport (reveals play in view).
-      start: pin ? "top top" : "top 85%",
-      end: pin ? "bottom bottom" : "bottom 55%",
+      // Pinned: progress across the section's runway. Non-pinned: progress
+      // begins only once the section is meaningfully in view (its top has
+      // risen to 55% of the viewport) and completes as it centres — so
+      // reveals never fire while the section is still off-screen below.
+      start: pin ? "top top" : "top 55%",
+      end: pin ? "bottom bottom" : "center 35%",
       onUpdate: (self) => setProgress(self.progress),
       onRefresh: (self) => setProgress(self.progress),
     });
@@ -68,7 +70,7 @@ export default function ChapterShell({ id, heightVh, children, ariaLabel, surfac
         ref={sectionRef}
         id={id}
         aria-label={ariaLabel}
-        className={`relative flex min-h-screen flex-col justify-center py-[12vh] ${surface ? "section-bg" : ""}`}
+        className={`relative flex min-h-screen flex-col justify-center py-[7vh] ${surface ? "section-bg" : ""}`}
       >
         {children(reduced ? 1 : progress)}
       </section>

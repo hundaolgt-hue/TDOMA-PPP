@@ -36,7 +36,7 @@ export default function Revenue({ progress }: ChapterProps) {
         </TextReveal>
 
         {/* KPI strip */}
-        <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
+        <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
           {[
             ["Y1 revenue", revenueM[0] / 1000, " bn", "ETB, incl. retail sale"],
             ["Y12 revenue", revenueM[11] / 1000, " bn", "25% p.a. escalation"],
@@ -53,7 +53,7 @@ export default function Revenue({ progress }: ChapterProps) {
           ))}
         </div>
 
-        <div className="mt-5 grid gap-5 lg:grid-cols-[1.5fr_1fr]">
+        <div className="mt-4 grid gap-4 lg:grid-cols-[1.5fr_1fr]">
           {/* Revenue vs EBITDA */}
           <div className="holo p-6">
             <div className="flex items-center justify-between">
@@ -64,7 +64,7 @@ export default function Revenue({ progress }: ChapterProps) {
               </div>
             </div>
             <div className="mt-3">
-              <SeriesChart data={ebitdaM} bars={revenueM} labels={years} reveal={revealA} height={230} />
+              <SeriesChart data={ebitdaM} bars={revenueM} labels={years} reveal={revealA} height={168} />
             </div>
           </div>
 
@@ -72,7 +72,7 @@ export default function Revenue({ progress }: ChapterProps) {
           <div className="holo p-6">
             <p className="label text-[var(--green)]">Profit after tax · ETB M</p>
             <div className="mt-3">
-              <SeriesChart data={patM} labels={years} reveal={revealB} height={230} stroke="var(--orange)" fillFrom="rgba(240,138,36,0.28)" />
+              <SeriesChart data={patM} labels={years} reveal={revealB} height={168} stroke="var(--orange)" fillFrom="rgba(240,138,36,0.28)" />
             </div>
             <p className="mt-2 text-sm text-[var(--dim)]">
               Y1 dip reflects one-off cost of sales on the retail units; PAT compounds to{" "}
@@ -81,7 +81,7 @@ export default function Revenue({ progress }: ChapterProps) {
           </div>
         </div>
 
-        <div className="mt-5 grid gap-5 lg:grid-cols-[1fr_1.5fr]">
+        <div className="mt-4 grid gap-4 lg:grid-cols-[1fr_1.5fr]">
           {/* Rental mix */}
           <div className="holo p-6">
             <p className="label text-[var(--green)]">Year-1 rental mix · net of VAT</p>
@@ -106,7 +106,7 @@ export default function Revenue({ progress }: ChapterProps) {
           <div className="holo p-6">
             <p className="label text-[var(--green)]">Closing cash balance · ETB M · IAS 7</p>
             <div className="mt-3">
-              <SeriesChart data={closingCashM} bars={rentalM} labels={years} reveal={revealC} height={230} barColor="rgba(14,122,82,0.14)" />
+              <SeriesChart data={closingCashM} bars={rentalM} labels={years} reveal={revealC} height={168} barColor="rgba(14,122,82,0.14)" />
             </div>
             <p className="mt-2 text-sm text-[var(--dim)]">
               Cash builds to <span className="font-semibold text-[var(--green-deep)]">{(closingCashM[11] / 1000).toFixed(1)} bn ETB</span> by Y12 after debt service and 50% dividend payout.
