@@ -38,3 +38,10 @@ export const ch2Sequence: SequenceManifest = {
   count: 170,
   path: (i) => frame("ch2", i),
 };
+
+// Programme separation film — decoded from Programs_video.mp4 (1080p, green).
+// Programmes light up in coloured, labelled bands ground-to-top.
+export const programSequence: SequenceManifest = {
+  count: 81,
+  path: (i) => frame("program", i),
+};
