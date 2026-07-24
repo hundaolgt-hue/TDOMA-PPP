@@ -21,6 +21,9 @@ type ShellProps = {
   /** Pure render function of normalized progress 0→1. */
   children: (progress: number) => ReactNode;
   ariaLabel: string;
+  /** Paint the shared fixed gradient so pinned DOM sections stay opaque and
+   *  seamless during hand-off. Omit for full-bleed video sections. */
+  surface?: boolean;
 };
 
 /**
@@ -32,7 +35,7 @@ type ShellProps = {
  * animation state, or run their own timers — that keeps them scrubbable
  * backwards and renderable at any arbitrary position.
  */
-export default function ChapterShell({ id, heightVh, children, ariaLabel }: ShellProps) {
+export default function ChapterShell({ id, heightVh, children, ariaLabel, surface }: ShellProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const [progress, setProgress] = useState(0);
   const reduced = useReducedMotion();
@@ -61,7 +64,7 @@ export default function ChapterShell({ id, heightVh, children, ariaLabel }: Shel
       style={{ height: reduced ? "auto" : `${heightVh}vh` }}
       className="relative"
     >
-      <div className="sticky top-0 h-screen overflow-hidden">
+      <div className={`sticky top-0 h-screen overflow-hidden ${surface ? "section-bg" : ""}`}>
         {children(reduced ? 1 : progress)}
       </div>
     </section>

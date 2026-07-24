@@ -1,39 +1,113 @@
 @import "tailwindcss";
+@import "@fontsource/rajdhani/500.css";
+@import "@fontsource/rajdhani/600.css";
+@import "@fontsource/rajdhani/700.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
 
-/* Design tokens. Two type roles only: display + body (real typefaces land in
-   the asset phase; the scale and rhythm are what the greybox locks in). */
+/* ---------------------------------------------------------------------------
+   Design tokens — green & white gradient world with a hint of orange.
+   The body gradient is a CSS placeholder for the client-supplied background
+   image: drop it in /public/bg.jpg and it takes over via .bg-image below.
+--------------------------------------------------------------------------- */
 :root {
-  --bg: #0a0c10;
-  --bg-alt: #0c0e12;
-  --ink: #f2f1ec;
-  --ink-dim: #8a8f98;
-}
-
-@theme {
-  --font-display: Georgia, "Times New Roman", serif;
+  --bg-a: #f6fbf7;          /* near-white mint */
+  --bg-b: #e3f3e8;          /* soft green */
+  --bg-c: #cfe9d9;          /* deeper mint band */
+  --green: #0e7a52;         /* primary green */
+  --green-deep: #0a5439;    /* headings/emphasis */
+  --ink: #12241b;           /* body text */
+  --dim: #567064;           /* secondary text */
+  --orange: #f08a24;        /* the hint of orange — accents only */
+  --orange-soft: #fdebd7;
+  --glass: rgba(255, 255, 255, 0.55);
+  --glass-strong: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.85);
+  --glass-shadow: 0 12px 48px rgba(14, 122, 82, 0.10);
 }
 
 html {
-  background: var(--bg);
   color: var(--ink);
-  scroll-behavior: auto; /* Lenis owns smoothing; native smooth would double it */
+  scroll-behavior: auto; /* Lenis owns smoothing */
 }
 
 body {
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  color: var(--ink);
+  /* One continuous gradient behind every section — transitions stay seamless
+     because sections themselves are transparent. */
+  background:
+    radial-gradient(1200px 800px at 85% -5%, var(--orange-soft) 0%, transparent 55%),
+    linear-gradient(165deg, var(--bg-a) 0%, var(--bg-b) 45%, var(--bg-c) 100%);
+  background-attachment: fixed;
 }
 
+/* When the client background image lands in /public/bg.jpg, add class
+   `bg-image` to <body> — it layers the image under the same soft wash. */
+.bg-image {
+  background:
+    linear-gradient(rgba(246, 251, 247, 0.82), rgba(227, 243, 232, 0.82)),
+    url("/bg.jpg") center / cover fixed;
+}
+
+/* Shared section surface — identical fixed gradient to <body>, so pinned DOM
+   sections stay opaque during hand-off yet read as one continuous background.
+   Keep in sync with the body background (and .bg-image when a bg.jpg lands). */
+.section-bg {
+  background:
+    radial-gradient(1200px 800px at 85% -5%, var(--orange-soft) 0%, transparent 55%),
+    linear-gradient(165deg, var(--bg-a) 0%, var(--bg-b) 45%, var(--bg-c) 100%);
+  background-attachment: fixed;
+}
+
+/* High-tech display face */
 .font-display {
-  font-family: var(--font-display);
-  letter-spacing: -0.01em;
+  font-family: "Rajdhani", "Inter", sans-serif;
+  letter-spacing: 0.01em;
 }
 
-/* Reduced motion: kill residual CSS transitions; chapters render final frames. */
+.font-tech-label {
+  font-family: "Rajdhani", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-weight: 600;
+}
+
+/* Glassmorphism surfaces */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-strong {
+  background: var(--glass-strong);
+  backdrop-filter: blur(22px) saturate(150%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  box-shadow: var(--glass-shadow);
+}
+
+/* Dark glass for text sitting over video frames */
+.glass-dark {
+  background: rgba(10, 30, 22, 0.45);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+}
+
+.tabular-nums { font-variant-numeric: tabular-nums; }
+
+/* Reduced motion: kill residual CSS transitions; sections render final frames. */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }

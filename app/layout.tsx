@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
+      {/* Add className="bg-image" to <body> once /public/bg.jpg is supplied. */}
       <body>{children}</body>
     </html>
   );

@@ -11,6 +11,8 @@
     "validate:data:strict": "tsx scripts/validate-data.ts --strict"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/rajdhani": "^5.3.0",
     "gsap": "^3.12.5",
     "lenis": "^1.1.13",
     "next": "^15.3.0",
