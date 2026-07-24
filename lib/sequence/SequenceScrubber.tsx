@@ -109,7 +109,10 @@ export default function SequenceScrubber({ progress, manifest, className = "", l
           inflight.current.delete(i);
           if (cache.current.has(i)) bmp.close();
           else cache.current.set(i, bmp);
-          if (i === lastReq.current) scheduleDraw();
+          // Always redraw the current frame when any windowed frame arrives —
+          // rAF-debounced and cheap, and guarantees the poster paints on load
+          // without waiting for a scroll event.
+          scheduleDraw();
         })
         .catch(() => inflight.current.delete(i));
     };
