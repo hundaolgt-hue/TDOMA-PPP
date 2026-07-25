@@ -9,7 +9,9 @@ const BP = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 // Real CGI renders of the Liiban Smart Mall. The carousel adapts to any count.
 const shots = [
+  { src: "/gallery/render-05-context.webp", cap: "In context", sub: "The tower amid the Merkato market fabric" },
   { src: "/gallery/render-01-street.webp", cap: "Street approach", sub: "Podium retail frontage · golden hour" },
+  { src: "/gallery/render-06-golden-aerial.webp", cap: "Golden hour", sub: "Aerial over the entry & parking court" },
   { src: "/gallery/render-02-dusk.webp", cap: "Blue hour", sub: "Illuminated crown & lobby signage" },
   { src: "/gallery/render-03-aerial.webp", cap: "Aerial context", sub: "Tower, terraces & parking court" },
   { src: "/gallery/render-04-plan.webp", cap: "Roofscape", sub: "Sky gardens & sculpted parapet" },
@@ -30,7 +32,22 @@ export default function Gallery({ progress }: ChapterProps) {
   const hovered = useRef<number | null>(null);
   const idle = useRef(true);
   const [active, setActive] = useState(0); // for caption / a11y only
+  const [lightbox, setLightbox] = useState<number | null>(null); // fullscreen index
   const n = shots.length;
+
+  // Fullscreen lightbox: Escape closes (resizes back to the gallery), arrows page.
+  useEffect(() => {
+    if (lightbox === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightbox(null);
+      else if (e.key === "ArrowRight") setLightbox((i) => (i === null ? i : (i + 1) % n));
+      else if (e.key === "ArrowLeft") setLightbox((i) => (i === null ? i : (i - 1 + n) % n));
+    };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden"; // lock scroll while fullscreen
+    return () => { window.removeEventListener("keydown", onKey); document.body.style.overflow = prev; };
+  }, [lightbox, n]);
 
   useEffect(() => {
     let raf = 0;
@@ -67,7 +84,7 @@ export default function Gallery({ progress }: ChapterProps) {
         el.style.filter = isHover
           ? "brightness(1.08) saturate(1.12)"
           : `brightness(${(0.72 + 0.28 * (1 - ax / (n / 2))).toFixed(3)})`;
-        el.style.pointerEvents = ax < 1.2 ? "auto" : "none";
+        el.style.pointerEvents = opacity > 0.3 ? "auto" : "none";
       });
       if (mod !== active) setActive(mod);
       raf = requestAnimationFrame(step);
@@ -111,7 +128,7 @@ export default function Gallery({ progress }: ChapterProps) {
         ref={stageRef}
         onPointerMove={onMove}
         onPointerLeave={onLeave}
-        className="relative mx-auto mt-6 h-[52vh] min-h-[340px] w-full max-w-[1500px] [perspective:1600px]"
+        className="relative mx-auto mt-6 h-[56vh] min-h-[360px] w-full max-w-[1600px] [perspective:1700px]"
         style={{ opacity: win(progress, 0.1, 0.3) }}
         role="group"
         aria-label="Revolving render gallery"
@@ -126,8 +143,13 @@ export default function Gallery({ progress }: ChapterProps) {
               ref={(el) => { cardRefs.current[i] = el; }}
               onPointerEnter={() => { hovered.current = i; idle.current = false; target.current = i; }}
               onPointerLeave={() => { hovered.current = null; }}
-              onClick={() => { hovered.current = null; idle.current = false; target.current = i; }}
-              className="absolute left-1/2 top-1/2 w-[clamp(300px,40vw,640px)] cursor-pointer [transform-style:preserve-3d] will-change-transform"
+              onClick={() => setLightbox(i)}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setLightbox(i); } }}
+              role="button"
+              tabIndex={0}
+              aria-label={`Open ${shots[i].cap} full screen`}
+              title="Click to view full screen"
+              className="absolute left-1/2 top-1/2 w-[clamp(340px,48vw,820px)] cursor-zoom-in [transform-style:preserve-3d] will-change-transform focus:outline-none"
               style={{ transition: "filter 200ms ease" }}
             >
               <figure className="holo group relative overflow-hidden rounded-2xl p-1.5">
@@ -167,6 +189,66 @@ export default function Gallery({ progress }: ChapterProps) {
           />
         ))}
       </div>
+
+      {/* Fullscreen lightbox — click a panel to enter, Esc / ✕ / backdrop to exit */}
+      {lightbox !== null && (
+        <div
+          className="fixed inset-0 z-[120] flex items-center justify-center bg-black/85 p-4 backdrop-blur-md md:p-10"
+          style={{ animation: "fadein 180ms ease" }}
+          onClick={() => setLightbox(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${shots[lightbox].cap} — full screen`}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`${BP}${shots[lightbox].src}`}
+            alt={shots[lightbox].cap}
+            className="max-h-full max-w-full rounded-xl object-contain shadow-2xl ring-1 ring-[var(--green)]/40"
+            onClick={(e) => e.stopPropagation()}
+            draggable={false}
+          />
+
+          {/* caption */}
+          <div className="glass-dark pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 rounded-xl px-5 py-2.5 text-center">
+            <p className="font-display text-base font-semibold text-white">{shots[lightbox].cap}</p>
+            <p className="text-sm text-white/70">{shots[lightbox].sub}</p>
+          </div>
+
+          {/* close */}
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); setLightbox(null); }}
+            aria-label="Close full screen (Esc)"
+            className="glass-strong absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full text-xl font-bold text-[var(--green-deep)] transition-transform hover:scale-110"
+          >
+            ✕
+          </button>
+
+          {/* prev / next */}
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); setLightbox((i) => (i === null ? i : (i - 1 + n) % n)); }}
+            aria-label="Previous"
+            className="glass-strong absolute left-4 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full text-2xl text-[var(--green-deep)] transition-transform hover:scale-110 md:left-8"
+          >
+            ‹
+          </button>
+          <button
+            type="button"
+            onClick={(e) => { e.stopPropagation(); setLightbox((i) => (i === null ? i : (i + 1) % n)); }}
+            aria-label="Next"
+            className="glass-strong absolute right-4 top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full text-2xl text-[var(--green-deep)] transition-transform hover:scale-110 md:right-8"
+          >
+            ›
+          </button>
+
+          {/* hint */}
+          <p className="pointer-events-none absolute left-1/2 top-6 -translate-x-1/2 text-sm font-medium text-white/70">
+            {lightbox + 1} / {n} · press Esc to return to the gallery
+          </p>
+        </div>
+      )}
     </div>
   );
 }
