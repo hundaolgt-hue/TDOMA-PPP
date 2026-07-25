@@ -8,3 +8,6 @@ next-env.d.ts
 
 # Large raw source media — derived frames in public/ are the runtime asset
 assets-raw/*.mp4
+
+# shadcn skills tooling (installed locally, not part of the app)
+.agents/
