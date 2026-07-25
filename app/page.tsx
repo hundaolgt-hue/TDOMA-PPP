@@ -31,7 +31,7 @@ const sections = [
   [Hero, "s1", "Introduction film", 320, true],
   [Company, "s2", "Company profile", 250, false],
   [Rationale, "s3", "Project rationale", 250, false],
-  [Suitability, "s3b", "Site suitability", 250, false],
+  [Suitability, "s3b", "Site suitability", 340, false],
   [PPP, "s4", "PPP structure", 230, false],
   [Massing, "s5", "Massing and metrics", 250, false],
   [Program, "s6", "Programme separation film", 320, true],
