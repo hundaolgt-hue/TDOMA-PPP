@@ -56,7 +56,7 @@ export default function Suitability({ progress }: ChapterProps) {
           style={{ opacity: win(progress, 0.08, 0.22), transform: `translateY(${lerp(24, 0, win(progress, 0.08, 0.26))}px)` }}
         >
           <iframe
-            src={`${BP}/suitability/heatmap-map.html`}
+            src={`${BP}/suitability/heatmap/`}
             title="Merkato siting heat-map — interactive"
             loading="lazy"
             className="h-full w-full rounded-xl border-0"
