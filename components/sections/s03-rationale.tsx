@@ -3,6 +3,7 @@
 import type { ChapterProps } from "@/lib/scroll/ChapterShell";
 import { win, lerp } from "@/lib/scroll/ease";
 import TextReveal from "@/components/ui/TextReveal";
+import BackgroundVideo from "@/components/ui/BackgroundVideo";
 
 /**
  * S3 — Project rationale. Key problems of the Merkato region as a diagram:
@@ -20,8 +21,16 @@ const problems = [
 export default function Rationale({ progress }: ChapterProps) {
   const arrowT = win(progress, 0.42, 0.56);
   return (
-    <div className="flex h-full items-center justify-center">
-      <div className="mx-auto w-full max-w-6xl px-6 md:px-10 2xl:max-w-[1500px]">
+    <div className="relative flex h-full items-center justify-center">
+      {/* Looping backdrop: the congested market the project answers to */}
+      <BackgroundVideo
+        src="/videos/merkato-problem.mp4"
+        poster="/videos/merkato-problem.jpg"
+        label="Aerial loop of congested Merkato street trading"
+        opacity={0.62}
+        scrim={0.66}
+      />
+      <div className="relative mx-auto w-full max-w-6xl px-6 md:px-10 2xl:max-w-[1500px]">
         <p className="font-tech-label text-xs text-[var(--orange-text)]">02 · Why this project</p>
         <TextReveal progress={progress} start={0.04} end={0.16}>
           <h2 className="font-display mt-3 text-[clamp(2.2rem,4.5vw,4.5rem)] font-bold leading-tight text-[var(--green-deep)]">
