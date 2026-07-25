@@ -38,7 +38,7 @@ export default function Capex({ progress }: ChapterProps) {
           {/* Composition bars */}
           <div className="holo p-6 2xl:p-8">
             <p className="label text-[var(--green)]">Development cost composition · ETB</p>
-            <ul className="mt-4 flex flex-col gap-3.5">
+            <ul className="mt-4 flex flex-col gap-3.5" role="img" aria-label={`Development cost composition totalling ${(total / BN).toFixed(2)} billion ETB. Hatched bars are non-cash contributions.`}>
               {capexComposition.map((c, i) => {
                 const t = win(progress, 0.12 + i * 0.04, 0.28 + i * 0.04);
                 const wpct = (c.valueEtb.value / max) * 100 * t;
@@ -72,11 +72,18 @@ export default function Capex({ progress }: ChapterProps) {
 
             <div className="holo p-6">
               <p className="label text-[var(--green)]">Funding · cash requirement {(cash / BN).toFixed(2)} bn</p>
-              {/* stacked funding bar */}
-              <div className="mt-3 flex h-9 w-full overflow-hidden rounded-lg">
-                <div className="h-full" style={{ width: `${(equity / (equity + debt)) * 100 * win(progress, 0.3, 0.5)}%`, background: "linear-gradient(90deg,var(--green-deep),var(--green))" }} />
-                <div className="h-full" style={{ width: `${(debt / (equity + debt)) * 100 * win(progress, 0.3, 0.5)}%`, background: "var(--orange)" }} />
-              </div>
+              {/* stacked funding bar — labelled so the split reads without colour */}
+              {(() => {
+                const eqPct = Math.round((equity / (equity + debt)) * 100);
+                const dbPct = 100 - eqPct;
+                const gw = win(progress, 0.3, 0.5);
+                return (
+                  <div className="mt-3 flex h-9 w-full overflow-hidden rounded-lg" role="img" aria-label={`Funding split: TDOMA equity ${eqPct} percent, debt ${dbPct} percent`}>
+                    <div className="flex h-full items-center justify-center overflow-hidden whitespace-nowrap text-xs font-semibold text-white" style={{ width: `${eqPct * gw}%`, background: "linear-gradient(90deg,var(--green-deep),var(--green))" }}>{gw > 0.75 ? `Equity ${eqPct}%` : ""}</div>
+                    <div className="flex h-full items-center justify-center overflow-hidden whitespace-nowrap text-xs font-semibold text-white" style={{ width: `${dbPct * gw}%`, background: "var(--orange)" }}>{gw > 0.75 ? `Debt ${dbPct}%` : ""}</div>
+                  </div>
+                );
+              })()}
               <div className="mt-3 grid grid-cols-2 gap-3">
                 <div className="glass p-4">
                   <p className="text-sm text-[var(--dim)]">TDOMA equity · 75%</p>

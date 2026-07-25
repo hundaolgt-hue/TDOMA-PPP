@@ -52,7 +52,9 @@ export default function Sensitivity({ progress }: ChapterProps) {
               </div>
               <div>
                 <dt className="text-sm uppercase tracking-wider text-[var(--dim)]">Min DSCR</dt>
-                <dd className="font-display text-3xl font-bold tabular-nums 2xl:text-4xl" style={{ color: breach ? "var(--orange)" : "var(--green-deep)" }}>{active.minDscr.value.toFixed(2)}×</dd>
+                <dd className="font-display flex items-baseline gap-1.5 text-3xl font-bold tabular-nums 2xl:text-4xl" style={{ color: breach ? "var(--orange)" : "var(--green-deep)" }}>
+                  {active.minDscr.value.toFixed(2)}×<span className="text-base" aria-hidden>{breach ? "⚠" : "✓"}</span>
+                </dd>
               </div>
             </dl>
             <p className="mt-4 rounded-xl p-3 text-sm" style={{ background: breach ? "var(--orange-soft)" : "rgba(14,122,82,0.08)", color: breach ? "#a85a12" : "var(--dim)" }}>{active.note}</p>
@@ -60,14 +62,14 @@ export default function Sensitivity({ progress }: ChapterProps) {
 
           <div className="glass-strong p-6 2xl:p-8" style={{ opacity: win(progress, 0.16, 0.3) }}>
             <p className="font-tech-label text-sm text-[var(--green)]">All scenarios · Project IRR vs margin</p>
-            <ul className="mt-4 flex flex-col gap-4">
+            <ul className="mt-4 flex flex-col gap-4" role="img" aria-label="Project IRR by scenario; scenarios breaching the 1.30 times DSCR covenant are flagged.">
               {sensitivity.map((s, i) => {
                 const t = win(progress, 0.2 + i * 0.05, 0.36 + i * 0.05);
                 return (
                   <li key={s.label} className="cursor-pointer" onClick={() => setIdx(i)}>
                     <div className="flex justify-between text-xs">
                       <span style={{ color: i === idx ? "var(--green-deep)" : "var(--dim)", fontWeight: i === idx ? 600 : 400 }}>{s.label}</span>
-                      <span className="tabular-nums text-[var(--dim)]">{s.irrPct.value.toFixed(1)}% · DSCR {s.minDscr.value.toFixed(2)}×</span>
+                      <span className="tabular-nums text-[var(--dim)]">{s.irrPct.value.toFixed(1)}% · DSCR {s.minDscr.value.toFixed(2)}×{s.minDscr.value < 1.3 && <span className="ml-1 font-semibold text-[var(--orange)]">▼ breach</span>}</span>
                     </div>
                     <div className="mt-1 h-2.5 w-full overflow-hidden rounded-full bg-[var(--green)]/10">
                       <div className="h-full rounded-full" style={{ width: `${(s.irrPct.value / maxIrr) * 100 * t}%`, background: s.minDscr.value < 1.3 ? "var(--orange)" : "linear-gradient(90deg,var(--green-deep),var(--green))" }} />

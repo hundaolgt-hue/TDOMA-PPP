@@ -63,7 +63,7 @@ export default function Revenue({ progress }: ChapterProps) {
                 <span className="flex items-center gap-1.5"><span className="h-2.5 w-4 rounded-sm bg-[var(--green-deep)]" />EBITDA</span>
               </div>
             </div>
-            <div className="mt-3">
+            <div className="mt-3" role="img" aria-label={`Revenue versus EBITDA over twelve years: revenue rises from ${(revenueM[0] / 1000).toFixed(2)} to ${(revenueM[11] / 1000).toFixed(2)} billion ETB.`}>
               <SeriesChart data={ebitdaM} bars={revenueM} labels={years} reveal={revealA} height={168} />
             </div>
           </div>
@@ -71,7 +71,7 @@ export default function Revenue({ progress }: ChapterProps) {
           {/* PAT growth */}
           <div className="holo p-6">
             <p className="label text-[var(--green)]">Profit after tax · ETB M</p>
-            <div className="mt-3">
+            <div className="mt-3" role="img" aria-label={`Profit after tax compounding to ${(patM[11] / 1000).toFixed(2)} billion ETB by year 12.`}>
               <SeriesChart data={patM} labels={years} reveal={revealB} height={168} stroke="var(--orange)" fillFrom="rgba(240,138,36,0.28)" />
             </div>
             <p className="mt-2 text-sm text-[var(--dim)]">
@@ -85,7 +85,7 @@ export default function Revenue({ progress }: ChapterProps) {
           {/* Rental mix */}
           <div className="holo p-6">
             <p className="label text-[var(--green)]">Year-1 rental mix · net of VAT</p>
-            <div className="mt-3 flex h-10 w-full overflow-hidden rounded-lg">
+            <div className="mt-3 flex h-10 w-full overflow-hidden rounded-lg" role="img" aria-label="Year-one rental mix by lettable category, net of VAT.">
               {revenueMix.map((s, i) => (
                 <div key={s.label} className="h-full" style={{ width: `${(s.valueM.value / mixTotal) * 100 * mixT}%`, background: zoneColors[i % zoneColors.length], opacity: 0.55 + 0.45 * mixT }} />
               ))}
@@ -105,7 +105,7 @@ export default function Revenue({ progress }: ChapterProps) {
           {/* Closing cash build-up */}
           <div className="holo p-6">
             <p className="label text-[var(--green)]">Closing cash balance · ETB M · IAS 7</p>
-            <div className="mt-3">
+            <div className="mt-3" role="img" aria-label={`Closing cash building to ${(closingCashM[11] / 1000).toFixed(1)} billion ETB by year 12 after debt service and dividends.`}>
               <SeriesChart data={closingCashM} bars={rentalM} labels={years} reveal={revealC} height={168} barColor="rgba(14,122,82,0.14)" />
             </div>
             <p className="mt-2 text-sm text-[var(--dim)]">
