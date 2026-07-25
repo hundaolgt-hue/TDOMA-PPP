@@ -25,6 +25,17 @@
   --glass-strong: rgba(255, 255, 255, 0.72);
   --glass-border: rgba(255, 255, 255, 0.85);
   --glass-shadow: 0 12px 48px rgba(14, 122, 82, 0.10);
+
+  /* Liquid-glass motion + depth tokens (ui-ux-pro-max: premium 400–600ms
+     curves, layered shadows, iridescent sheen). */
+  --ease-glass: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-glass: 480ms;
+  --shadow-lift:
+    0 2px 6px rgba(10, 84, 57, 0.06),
+    0 10px 24px rgba(14, 122, 82, 0.10),
+    0 28px 70px rgba(14, 122, 82, 0.14);
+  /* Subtle film grain for tactile premium depth — inline SVG, no external asset */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
 }
 
 /* Global type scale — bumped for legibility and to adapt to larger screens.
@@ -69,11 +80,18 @@ body {
   background-attachment: fixed;
 }
 
-/* High-tech display face */
+/* High-tech display face. Large headings get negative tracking (Exaggerated
+   Minimalism) so statement type reads tight and architectural. */
 .font-display {
   font-family: "Rajdhani", "Inter", sans-serif;
   letter-spacing: 0.01em;
 }
+/* Optical tracking: the bigger the type, the tighter it should set. */
+h1.font-display, h2.font-display {
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+h3.font-display { letter-spacing: -0.012em; }
 
 .font-tech-label {
   font-family: "Rajdhani", sans-serif;
@@ -131,10 +149,60 @@ body {
   position: absolute; inset: 0;
   border-radius: 20px;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(14,122,82,0.55), rgba(240,138,36,0.35), transparent 60%);
+  /* Iridescent hairline — green → orange → cool mint, reads as refracted light */
+  background: linear-gradient(135deg,
+    rgba(14,122,82,0.62) 0%,
+    rgba(240,138,36,0.42) 32%,
+    rgba(120,220,190,0.38) 58%,
+    transparent 78%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor; mask-composite: exclude;
   pointer-events: none;
+}
+/* Specular sheen: a soft light band across the top edge, like glass catching light */
+.holo::after {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 42%),
+    radial-gradient(120% 60% at 15% -10%, rgba(255,255,255,0.5), transparent 60%);
+  mix-blend-mode: screen;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Tactile grain overlay — apply to hero/feature panels for premium depth */
+.grain::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background-image: var(--grain);
+  background-size: 140px 140px;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* Interactive lift — hover feedback on clickable surfaces (skill: hover states) */
+.lift {
+  transition:
+    transform var(--dur-glass) var(--ease-glass),
+    box-shadow var(--dur-glass) var(--ease-glass),
+    border-color var(--dur-glass) var(--ease-glass);
+  will-change: transform;
+}
+.lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lift);
+}
+
+/* Visible focus ring everywhere — HIGH-severity accessibility rule.
+   Keyboard users get a clear indicator; pointer users never see it. */
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+  border-radius: 6px;
 }
 
 /* Faint data grid backdrop for chart panels */

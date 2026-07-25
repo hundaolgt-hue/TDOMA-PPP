@@ -24,7 +24,7 @@ export default function Final({ progress }: ChapterProps) {
       <div className="pointer-events-none absolute inset-0" style={{ opacity: closeIn, background: "linear-gradient(180deg, rgba(246,251,247,0.2), rgba(227,243,232,0.72))" }} />
 
       <div className="absolute inset-0 flex items-center justify-center p-6" style={{ opacity: closeIn }}>
-        <div className="glass-strong max-w-2xl p-10 text-center 2xl:p-14">
+        <div className="glass-strong grain relative max-w-2xl overflow-hidden p-10 text-center 2xl:p-14">
           <p className="font-tech-label text-sm text-[var(--orange)]">Liiban Smart Mall</p>
           <p className="font-display mt-3 text-4xl font-bold leading-tight text-[var(--green-deep)] md:text-5xl">
             A vertical trading city for Merkato.

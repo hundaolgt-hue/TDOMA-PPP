@@ -62,18 +62,29 @@ export default function Sensitivity({ progress }: ChapterProps) {
 
           <div className="glass-strong p-6 2xl:p-8" style={{ opacity: win(progress, 0.16, 0.3) }}>
             <p className="font-tech-label text-sm text-[var(--green)]">All scenarios · Project IRR vs margin</p>
-            <ul className="mt-4 flex flex-col gap-4" role="img" aria-label="Project IRR by scenario; scenarios breaching the 1.30 times DSCR covenant are flagged.">
+            <ul className="mt-4 flex flex-col gap-2">
               {sensitivity.map((s, i) => {
                 const t = win(progress, 0.2 + i * 0.05, 0.36 + i * 0.05);
+                const isBreach = s.minDscr.value < 1.3;
                 return (
-                  <li key={s.label} className="cursor-pointer" onClick={() => setIdx(i)}>
-                    <div className="flex justify-between text-xs">
-                      <span style={{ color: i === idx ? "var(--green-deep)" : "var(--dim)", fontWeight: i === idx ? 600 : 400 }}>{s.label}</span>
-                      <span className="tabular-nums text-[var(--dim)]">{s.irrPct.value.toFixed(1)}% · DSCR {s.minDscr.value.toFixed(2)}×{s.minDscr.value < 1.3 && <span className="ml-1 font-semibold text-[var(--orange)]">▼ breach</span>}</span>
-                    </div>
-                    <div className="mt-1 h-2.5 w-full overflow-hidden rounded-full bg-[var(--green)]/10">
-                      <div className="h-full rounded-full" style={{ width: `${(s.irrPct.value / maxIrr) * 100 * t}%`, background: s.minDscr.value < 1.3 ? "var(--orange)" : "linear-gradient(90deg,var(--green-deep),var(--green))" }} />
-                    </div>
+                  <li key={s.label}>
+                    {/* Real button: keyboard-reachable, with hover + selected feedback */}
+                    <button
+                      type="button"
+                      onClick={() => setIdx(i)}
+                      aria-pressed={i === idx}
+                      aria-label={`${s.label}: project IRR ${s.irrPct.value.toFixed(1)} percent, minimum DSCR ${s.minDscr.value.toFixed(2)} times${isBreach ? " — breaches the 1.30 times covenant" : ""}`}
+                      className="w-full rounded-xl px-2.5 py-2 text-left transition-colors duration-200 hover:bg-[var(--green)]/[0.07]"
+                      style={{ background: i === idx ? "rgba(14,122,82,0.09)" : undefined }}
+                    >
+                      <div className="flex justify-between text-xs">
+                        <span style={{ color: i === idx ? "var(--green-deep)" : "var(--dim)", fontWeight: i === idx ? 600 : 400 }}>{s.label}</span>
+                        <span className="tabular-nums text-[var(--dim)]">{s.irrPct.value.toFixed(1)}% · DSCR {s.minDscr.value.toFixed(2)}×{isBreach && <span className="ml-1 font-semibold text-[var(--orange)]">▼ breach</span>}</span>
+                      </div>
+                      <div className="mt-1 h-2.5 w-full overflow-hidden rounded-full bg-[var(--green)]/10">
+                        <div className="h-full rounded-full" style={{ width: `${(s.irrPct.value / maxIrr) * 100 * t}%`, background: isBreach ? "var(--orange)" : "linear-gradient(90deg,var(--green-deep),var(--green))" }} />
+                      </div>
+                    </button>
                   </li>
                 );
               })}
