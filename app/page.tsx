@@ -13,6 +13,7 @@ const Logo3D = dynamic(() => import("@/components/ui/Logo3D"), { ssr: false });
 import Hero from "@/components/sections/s01-hero";
 import Company from "@/components/sections/s02-company";
 import Rationale from "@/components/sections/s03-rationale";
+import Suitability from "@/components/sections/s03b-suitability";
 import PPP from "@/components/sections/s04-ppp";
 import Massing from "@/components/sections/s05-massing";
 import Program from "@/components/sections/s06-program";
@@ -30,6 +31,7 @@ const sections = [
   [Hero, "s1", "Introduction film", 320, true],
   [Company, "s2", "Company profile", 250, false],
   [Rationale, "s3", "Project rationale", 250, false],
+  [Suitability, "s3b", "Site suitability", 250, false],
   [PPP, "s4", "PPP structure", 230, false],
   [Massing, "s5", "Massing and metrics", 250, false],
   [Program, "s6", "Programme separation film", 320, true],

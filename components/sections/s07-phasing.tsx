@@ -35,7 +35,7 @@ export default function Phasing({ progress }: ChapterProps) {
       {/* Top title */}
       <div className="absolute inset-x-0 top-0 flex justify-center p-6 md:p-8">
         <div className="glass px-8 py-4 text-center">
-          <p className="label text-[var(--orange)]">06 · Delivery</p>
+          <p className="label text-[var(--orange)]">07 · Delivery</p>
           <h2 className="font-display text-3xl font-bold text-[var(--green-deep)] md:text-4xl">Built in six stages.</h2>
           <p className="mt-1 text-base text-[var(--dim)]">
             {constructionMonths.value} months · {(totalConstructionEtb.value / 1e9).toFixed(2)} bn ETB works

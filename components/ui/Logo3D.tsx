@@ -18,6 +18,7 @@ const ACTIONS: Action[] = [
   { vy: 0.55, vx: 0, tiltZ: 0, bob: 0.04, pulse: 0, scale: 1 }, // s1 hero — gentle drift
   { vy: 0.9, vx: 0, tiltZ: 0.18, bob: 0, pulse: 0, scale: 1 }, // s2 company — lean + spin
   { vy: 0.35, vx: 0, tiltZ: -0.16, bob: 0.09, pulse: 0, scale: 1.04 }, // s3 rationale — float
+  { vy: 0.6, vx: 0.6, tiltZ: 0.12, bob: 0, pulse: 0, scale: 1 }, // s3b suitability — analytical scan
   { vy: 1.9, vx: 0, tiltZ: 0, bob: 0, pulse: 0, scale: 1 }, // s4 ppp — fast spin
   { vy: 0.25, vx: 1.7, tiltZ: 0, bob: 0, pulse: 0, scale: 1 }, // s5 massing — barrel roll
   { vy: 1.0, vx: 0, tiltZ: 0, bob: 0, pulse: 0.09, scale: 1.03 }, // s6 program — pulse

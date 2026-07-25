@@ -1,0 +1,205 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 10.5pt; color:#1a1a1a;
+        margin: 2.2cm; line-height: 1.45; }
+ h1 { font-size: 20pt; border-bottom: 3px solid #b33; padding-bottom: 6px; }
+ h2 { font-size: 13.5pt; color: #922; margin-top: 22px; }
+ table { border-collapse: collapse; width: 100%; font-size: 8.5pt; margin: 8px 0; }
+ th, td { border: 1px solid #bbb; padding: 3px 6px; text-align: left; }
+ th { background: #f0e3e3; }
+ img { max-width: 100%; margin: 8px 0; }
+ .meta { color: #555; font-size: 9pt; }
+ .caveat { background: #fdf3d8; border-left: 4px solid #d99; padding: 8px 12px; }
+</style></head><body>
+
+<h1>Merkato Mixed-Use Wholesale-Trade Complex<br>Site-Suitability Feasibility Study</h1>
+<p class="meta">Planning-stage screening · Addis Ababa, Ethiopia · 2026-07-14 ·
+CRS EPSG:32637 · 20 m analysis grid</p>
+
+<h2>1. Executive summary</h2>
+<p>This study delineates the Merkato commercial area (1.71 km²) and screens it
+with a nine-criterion weighted-overlay (MCDA) model for parcels ≥ 5,000 m²
+able to host a mixed-use wholesale complex with three basement levels, automated
+logistics and a data-centre node. Weighting is <b>strongly market-forward per client
+direction</b> (trade gravity 0.32, dominant weight) and the market criterion is built
+around the observed commercial-POI hotspot. <b>Per client direction the headline
+deliverable is not a parcel shortlist but a siting heat map</b>: the weighted
+suitability surface, continuously graded down near satellite-measured tall buildings
+(penalty from 8 m, zero at ≥ 15 m) and large footprints (≥ 800 m²), with hard
+exclusions removed. The hottest areas are vectorised into
+<b>30 priority-A zones (17.8 ha, nearest
+58 m from the core anchor)</b> and 25 priority-B zones
+(13.7 ha). These are investigation areas for groundwork —
+cadastre verification, occupancy census, geotechnical survey, government consent —
+after which specific parcels can be pinpointed. Within 400 m of the anchor, 628 of
+1,225 grid cells carry measured heights ≥ 12 m and 341 large-footprint structures, so
+near-core opportunities are pockets, not blocks. Three illustrative parcels (§6.1) show
+what the zones can yield; they are calibration examples, not proposals. The base and
+displacement-weighted alternative surfaces correlate at r ≈ 0.98.</p>
+
+<h2>2. Objective and constraints</h2>
+<ul>
+<li>Parcel ≥ 5,000 m², buildable geometry (compactness ≥ 0.25, ≤ 6 ha single parcel).</li>
+<li>Three basement levels → sensitivity to slope, drainage and flood risk (geotechnical
+    survey mandatory before commitment).</li>
+<li>Automated logistics + data-centre node → electrical capacity proximity.</li>
+<li>Wholesale core → arterial/freight access; high footfall → transit access.</li>
+<li>Explicit displacement minimisation → vacant / low-rise / dilapidated fabric
+    preferred and weighted highest.</li>
+</ul>
+
+<h2>3. Study-area delineation</h2>
+<p>The boundary was derived, not assumed: a 50 m kernel-density surface was built from
+(a) OSM commercial POIs (870 points used), (b) market/commerce polygons (CB-* codes) of
+the 2022 Structural Plan land-use layer, and (c) named sub-market anchor points
+(Merkato, Sebategna, Berbere Tera, Gojam Berenda, Autobus Tera, Mesalemia…). The 18%
+iso-intensity contour containing the Merkato point was retained:
+<b>1.71 km²</b>.</p>
+<img src="boundary_check.png">
+
+<h2>4. Data sources and vintage</h2>
+<table>
+<tr><th>Layer</th><th>Source</th><th>Vintage</th><th>Role</th></tr>
+<tr><td>Land use (11,363 polys citywide)</td><td>AA Structural Plan First-Term Amendment (client-provided FileGDB)</td><td>June 2022</td><td>Zoning compatibility, exclusions, boundary</td></tr>
+<tr><td>Road network & transport</td><td>AA Structural Plan (client-provided FileGDB)</td><td>June 2022</td><td>Freight/transit access, terminals, LRT</td></tr>
+<tr><td>Building height regulation</td><td>AA BH Regulation Amendment (client-provided FileGDB)</td><td>June 2022</td><td>Height-headroom criterion</td></tr>
+<tr><td>Roads, buildings, POIs, power</td><td>OpenStreetMap via Overpass</td><td>Live, July 2026</td><td>Hierarchy, POI density, heights (570 tagged)</td></tr>
+<tr><td>Building footprints (131,701)</td><td>VIDA combined Google Open Buildings v3 / Microsoft / OSM</td><td>2023 release</td><td>Coverage / vacancy criterion</td></tr>
+<tr><td>Building heights (satellite-measured, 0.5 m grid)</td><td>Google Open Buildings 2.5D Temporal, building_height + building_presence bands</td><td>June 2023</td><td>Low-rise verification; high-rise exclusion in vacancy criterion and site filters</td></tr>
+<tr><td>Site imagery audit</td><td>Esri World Imagery (Maxar), zoom 18</td><td>current basemap</td><td>Visual verification of each shortlisted site</td></tr>
+<tr><td>DEM 30 m</td><td>Copernicus GLO-30 (AWS COG)</td><td>2021 (GLO-30 2021 release)</td><td>Slope, drainage proxy</td></tr>
+<tr><td>Population 100 m</td><td>WorldPop 2020 UN-adjusted constrained</td><td>2020</td><td>Catchment density</td></tr>
+</table>
+<p>All layers were validated, repaired (buffer-0), reprojected to EPSG:32637 and clipped
+to the study bbox. Provided layers arrived in EPSG:20137 (Adindan / UTM 37N).</p>
+
+<h2>5. Method</h2>
+<p>Each criterion was normalised to 0–1 on a common 20 m grid (distance-decay for
+proximity criteria; category scores for zoning/height; min–max with percentile clipping
+for continuous layers), then combined by weighted linear overlay. Hard exclusions
+(score 0): heritage structures & historical sites, river buffers, parks/forest/cemetery,
+high-tension-line corridors, water reservoirs, and severe-drainage cells (top-15% risk).
+They cover 4.1% of the study area.</p>
+<table>
+<tr><th>Criterion</th><th>Weight (base)</th><th>Weight (sensitivity)</th></tr>
+<tr><td>Vacancy / low displacement</td><td>0.18</td><td>0.26</td></tr><tr><td>Trade gravity & catchment</td><td>0.32</td><td>0.24</td></tr><tr><td>Land-use compatibility</td><td>0.08</td><td>0.08</td></tr><tr><td>Height-regulation headroom</td><td>0.06</td><td>0.06</td></tr><tr><td>Road & freight access</td><td>0.10</td><td>0.10</td></tr><tr><td>Transit & footfall</td><td>0.08</td><td>0.08</td></tr><tr><td>Power capacity (proxy)</td><td>0.08</td><td>0.08</td></tr><tr><td>Slope & buildability</td><td>0.05</td><td>0.05</td></tr><tr><td>Flood / drainage risk (inverted)</td><td>0.05</td><td>0.05</td></tr>
+</table>
+<p><b>Weighting rationale.</b> Trade gravity & catchment dominates (0.32) per explicit,
+twice-reaffirmed client direction — the complex must anchor in the market hotspot. The
+criterion itself is hotspot-centric: commercial-POI density leads (45%), core distance
+second (35%, sharp 350 m half-distance), population catchment third (20%).
+Vacancy/displacement remains second overall (0.18); freight access (0.10) and zoning
+(0.08) are the key operational and regulatory enablers; height headroom (0.06) captures
+the ~70 m massing; transit and power (0.08 each) support footfall and the
+data-centre/logistics load; slope and flood (0.05 each) are screening-level geotechnical
+proxies. Criteria 1 and 2 now pull in opposite directions by design (the hotspot is
+dense; vacancy prefers open fabric) — the height and big-building hard filters arbitrate.
+Final ranking applies a core-proximity multiplier (half-effect at 600 m), and candidacy
+requires the market criterion ≥ its in-boundary median (the hotspot rule); both are
+documented in scripts/config.py.</p>
+<img src="criteria_panel.png">
+
+<h2>6. Results — siting heat map and priority zones</h2>
+<img src="siting_heatmap.png">
+<p>The heat map multiplies the weighted suitability surface by a satellite-measured
+height penalty (full value below 8 m, zero at ≥ 15 m), a big-building penalty
+(≥ 800 m² footprints, zero at 50% cell coverage) and the hard-exclusion mask. Dark
+voids are therefore precisely the areas the client asked to avoid — existing
+substantial/tall buildings — while bright ribbons are low-rise, hotspot-adjacent land.
+Zone A (top 15% of in-boundary heat, 30 polygons, 17.8 ha) and zone B
+(p70–85, 25 polygons, 13.7 ha) are delivered as
+<code>priority_zones.gpkg</code> with per-zone heat, market score, measured max height
+and core distance, for use in the groundwork and consent phase. The nearest zone-A
+pocket lies 58 m from the core anchor — small near-core pockets that a
+5,000 m² parcel rule would discard remain visible in this framing, which is the point
+of deferring parcel selection.</p>
+<img src="suitability_map.png">
+
+<h2>6.1 Illustrative parcels (calibration only — not proposals)</h2>
+<p>To sanity-check that the zones can yield buildable parcels, the extraction rule was
+also run: suitability ≥ p45 within the boundary, <b>market criterion ≥
+p50 (the hotspot rule)</b>, vacancy score ≥ 0.35,
+land-use score ≥ 0.45 (blocks road right-of-way, civic and green land), and a
+<b>substantial-structure filter</b>: buildings with footprints ≥ 800 m² are treated as
+significant regardless of missing height data — cells more than 20% covered by such
+structures are barred from candidacy, and no shortlisted site may have more than 10%
+of its area under them (all five have ≈ 0%). In addition, a <b>satellite-measured
+height filter</b> (Google Open Buildings 2.5D Temporal, June 2023): cells whose
+measured building height is ≥ 12 m (≈ G+3) are barred, and no shortlisted site may
+contain any structure ≥ 15 m — the shortlist's measured maxima are 7.5–9.5 m. Site
+polygons may consolidate minor internal lanes (single 20 m grid gaps, typical kebele
+lanes closed in Addis block redevelopment); arterial rights-of-way still separate
+sites, and hard blockers are never bridged. The
+scorecard reports each site's true built-coverage (from 131,701 footprints on a 5 m
+subgrid), big-building share, and mean/max measured height for audit. Every site was
+additionally verified visually on current high-resolution satellite imagery (§6.1).
+Note that genuinely empty land is nearly absent in the Merkato core: most shortlisted
+blocks carry dense <i>small-grain</i> (≤ ~780 m² footprint) single-storey fabric, which
+is precisely the redevelopment target — occupant surveys remain essential.</p>
+<table><tr><th>site_id</th><th>area_m2</th><th>suitability</th><th>suitability_alt</th><th>built_cover</th><th>big_cover</th><th>main_landuse</th><th>height_zone</th><th>vacancy</th><th>market</th><th>landuse</th><th>height</th><th>freight</th><th>transit</th><th>power</th><th>slope</th><th>flood</th></tr><tr><td>S1</td><td>7,455</td><td>0.62</td><td>0.59</td><td>0.60</td><td>0.00</td><td>Higher Level Market</td><td>Zone_2</td><td>0.38</td><td>0.74</td><td>0.96</td><td>0.78</td><td>0.43</td><td>0.69</td><td>0.21</td><td>0.73</td><td>0.85</td></tr><tr><td>S2</td><td>5,998</td><td>0.60</td><td>0.59</td><td>0.65</td><td>0.00</td><td>High Density Mixed Residence</td><td>Zone_2</td><td>0.44</td><td>0.60</td><td>0.75</td><td>0.80</td><td>0.60</td><td>0.83</td><td>0.16</td><td>0.76</td><td>0.82</td></tr><tr><td>S3</td><td>14,784</td><td>0.57</td><td>0.56</td><td>0.35</td><td>0.00</td><td>Parking Building</td><td>Zone_2</td><td>0.47</td><td>0.53</td><td>0.66</td><td>0.72</td><td>0.58</td><td>0.82</td><td>0.15</td><td>0.80</td><td>0.85</td></tr></table>
+<p><b>S1</b> — 7,455 m² (0.75 ha), centroid ≈ 9.03145°N 38.73576°E, 369 m from the Merkato core anchor. Dominant planned land use: <i>Higher Level Market</i>; height-regulation zone: <i>Zone_2</i>. Composite suitability 0.624 (alt-weights 0.595). Strengths: land-use compatibility, flood / drainage risk (inverted), height-regulation headroom. Weaker on: power capacity (proxy), vacancy / low displacement. Moderately built fabric — displacement must be verified block-by-block before this site is carried forward. </p><p><b>S2</b> — 5,998 m² (0.60 ha), centroid ≈ 9.03480°N 38.73459°E, 680 m from the Merkato core anchor. Dominant planned land use: <i>High Density Mixed Residence</i>; height-regulation zone: <i>Zone_2</i>. Composite suitability 0.599 (alt-weights 0.586). Strengths: transit & footfall, flood / drainage risk (inverted), height-regulation headroom. Weaker on: power capacity (proxy), vacancy / low displacement. Moderately built fabric — displacement must be verified block-by-block before this site is carried forward. </p><p><b>S3</b> — 14,784 m² (1.48 ha), centroid ≈ 9.03562°N 38.73252°E, 910 m from the Merkato core anchor. Dominant planned land use: <i>Parking Building</i>; height-regulation zone: <i>Zone_2</i>. Composite suitability 0.568 (alt-weights 0.563). Strengths: flood / drainage risk (inverted), transit & footfall, slope & buildability. Weaker on: power capacity (proxy), vacancy / low displacement. Moderately built fabric — displacement must be verified block-by-block before this site is carried forward. </p>
+
+<h2>6.2 Satellite-imagery audit of the illustrative parcels</h2>
+<p>Each site was rendered on current Esri World Imagery (zoom 18) and inspected for
+tall or substantial structures. Findings: S1 — single-storey market-stall/shed fabric
+in the dense heart of Merkato, 369 m from the anchor; the surrounding mid-rise market
+halls all fall outside the outline. Dense trader occupancy — the strongest market
+position of any feasible parcel, and the heaviest relocation-planning burden.
+S2 — compact low-rise block fronting the arterial/LRT corridor beside a school
+compound (outside). S3 — a substantially cleared/bare parcel with rubble plus adjacent
+low sheds and a parking strip (35% built cover, emptiest of the three). No high-rise
+structure intersects any site outline.</p>
+<img src="site_imagery/S1.png"><img src="site_imagery/S2.png"><img src="site_imagery/S3.png">
+
+<h2>7. Sensitivity</h2>
+<p>A displacement-heavy alternative weighting (vacancy 0.26, market 0.24, landuse 0.08,
+height 0.06) was run in full. The two suitability surfaces correlate at r ≈ 0.983 and
+the same sites emerge — the shortlist is not an artefact of the chosen weights. Note
+the base weighting itself is the strongly market-forward set requested by the client;
+the alternative shows the displacement-first perspective.</p>
+
+<h2>8. Caveats and integrity statement</h2>
+<div class="caveat"><p>This is a <b>planning-stage screening, not a legal
+determination</b>. Candidate sites are presented as <i>meeting the stated criteria,
+subject to the city's land-allocation authority</i> — not as a claim on specific land.
+Before any parcel is relied upon: verify the official cadastre and tenure status,
+obtain a zoning certificate, commission a geotechnical survey (3-basement excavation),
+confirm utility capacity with Ethiopian Electric Utility, and ground-truth the top
+candidates with site visits and an occupancy/displacement census.</p></div>
+<ul>
+<li><b>Power criterion is a proxy</b>: OSM power data in the bbox is nearly empty
+(1 point); the criterion uses structural-plan power-station polygons and high-tension
+corridors. Absolute values are low everywhere; only relative differences are
+meaningful. EEU substation spare-load data must be obtained directly.</li>
+<li><b>Flood criterion is a proxy</b>: a depression-depth surrogate (focal relative
+elevation) replaced full flow accumulation after a tooling failure; river-buffer
+proximity supplements it. A hydrological/drainage study is required for basements.</li>
+<li><b>Building heights are satellite-measured, not surveyed</b>: per-cell maxima come
+from Google Open Buildings 2.5D Temporal (June 2023, model-derived from Sentinel-2 at
+~4 m effective resolution, aggregated here to 20 m), supplemented by OSM tags (570
+buildings) and a conservative ≥ 800 m²-footprint assumption. The 2.5D model can
+under-estimate slender towers and reflects mid-2023 — anything built since is
+invisible to it, which is why the visual imagery audit (§6.1) and field verification
+of storey counts on shortlisted blocks remain required.</li>
+<li><b>Height-regulation zones were scored by assumption</b> (Zone_1 highest cap →
+1.0 … zone_4 → 0.35) because the legend PDF was not machine-readable; recovered MXD
+strings ("G+24=25", "G+6") support the ordering. Confirm zone caps with the Addis
+Ababa Plan Commission before design.</li>
+<li>Vacancy vs. market-gravity criteria overlap mildly; both favour the market core.</li>
+<li>WorldPop is a 2020 model surface resampled from 100 m; it informs relative
+catchment only.</li>
+</ul>
+
+<h2>9. Recommended next steps</h2>
+<ol>
+<li>Ground-truth the five sites (occupancy census, dilapidation survey, trader
+mapping).</li>
+<li>Cadastre/tenure verification and land-allocation engagement with the city.</li>
+<li>Geotechnical boreholes + groundwater assessment on the top two sites.</li>
+<li>EEU load-flow enquiry for the data-centre node; telecom fibre availability.</li>
+<li>Traffic/freight micro-simulation for the preferred site's service access.</li>
+</ol>
+
+<p class="meta">Reproducible pipeline: <code>python run_all.py</code> — see README.md.
+All intermediate layers cached under data/; deliverables under outputs/.</p>
+</body></html>

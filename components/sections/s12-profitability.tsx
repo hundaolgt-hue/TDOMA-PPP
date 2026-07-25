@@ -57,7 +57,7 @@ export default function Profitability({ progress }: ChapterProps) {
       <div className="mx-auto w-full max-w-6xl px-6 md:px-10 2xl:max-w-[1600px]">
         <div className="flex items-center gap-3">
           <span className="pulse-dot h-2.5 w-2.5 rounded-full bg-[var(--orange)]" />
-          <p className="label text-[var(--orange)]">11 · Returns · audited IFRS · 13/13 checks pass</p>
+          <p className="label text-[var(--orange)]">12 · Returns · audited IFRS · 13/13 checks pass</p>
         </div>
         <TextReveal progress={progress} start={0.03} end={0.14}>
           <h2 className="font-display mt-2 text-[clamp(2.2rem,4.5vw,4.5rem)] font-bold leading-tight text-[var(--green-deep)]">
