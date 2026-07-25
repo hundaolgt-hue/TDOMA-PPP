@@ -112,7 +112,7 @@ export default function Gallery({ progress }: ChapterProps) {
   return (
     <div className="flex h-full flex-col justify-center overflow-hidden px-6 py-[6vh] md:px-10">
       <div className="mx-auto w-full max-w-6xl 2xl:max-w-[1680px]">
-        <p className="font-tech-label text-xs text-[var(--orange)]">13 · Gallery</p>
+        <p className="font-tech-label text-xs text-[var(--orange-text)]">13 · Gallery</p>
         <div className="flex flex-wrap items-end justify-between gap-3">
           <TextReveal progress={progress} start={0.04} end={0.16}>
             <h2 className="font-display mt-2 text-[clamp(2rem,4vw,4rem)] font-bold leading-tight text-[var(--green-deep)]">

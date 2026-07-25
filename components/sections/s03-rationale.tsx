@@ -22,7 +22,7 @@ export default function Rationale({ progress }: ChapterProps) {
   return (
     <div className="flex h-full items-center justify-center">
       <div className="mx-auto w-full max-w-6xl px-6 md:px-10 2xl:max-w-[1500px]">
-        <p className="font-tech-label text-xs text-[var(--orange)]">02 · Why this project</p>
+        <p className="font-tech-label text-xs text-[var(--orange-text)]">02 · Why this project</p>
         <TextReveal progress={progress} start={0.04} end={0.16}>
           <h2 className="font-display mt-3 text-[clamp(2.2rem,4.5vw,4.5rem)] font-bold leading-tight text-[var(--green-deep)]">
             Merkato works despite itself.
@@ -35,7 +35,7 @@ export default function Rationale({ progress }: ChapterProps) {
             const t = win(progress, 0.14 + i * 0.07, 0.26 + i * 0.07);
             return (
               <div key={p.k} className="glass p-5" style={{ opacity: t, transform: `translateY(${lerp(16, 0, t)}px)` }}>
-                <p className="font-tech-label text-xs text-[var(--orange)]">{p.k}</p>
+                <p className="font-tech-label text-xs text-[var(--orange-text)]">{p.k}</p>
                 <p className="font-display mt-1 text-xl font-semibold text-[var(--green-deep)]">{p.title}</p>
                 <p className="mt-2 text-xs leading-relaxed text-[var(--dim)]">{p.text}</p>
                 <p className="mt-3 text-xs uppercase tracking-wider text-[var(--dim)]/80">{p.src}</p>

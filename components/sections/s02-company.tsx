@@ -15,7 +15,7 @@ export default function Company({ progress }: ChapterProps) {
     <div className="flex h-full items-center justify-center py-8">
       <div className="mx-auto w-full max-w-6xl px-6 md:px-10 2xl:max-w-[1600px]">
         <div className="holo p-8 md:p-12 2xl:p-16">
-          <p className="label text-[var(--orange)]">01 · The company</p>
+          <p className="label text-[var(--orange-text)]">01 · The company</p>
           <TextReveal progress={progress} start={0.04} end={0.16}>
             <h2 className="font-display mt-3 text-[clamp(2.4rem,5vw,5rem)] font-bold leading-tight text-[var(--green-deep)]">
               {sponsor.name}
@@ -79,7 +79,7 @@ export default function Company({ progress }: ChapterProps) {
               const t = win(progress, 0.4 + i * 0.07, 0.54 + i * 0.07);
               return (
                 <li key={m.date} className="glass p-5" style={{ opacity: t, transform: `translateY(${lerp(14, 0, t)}px)` }}>
-                  <p className="label text-[var(--orange)]">{m.date}</p>
+                  <p className="label text-[var(--orange-text)]">{m.date}</p>
                   <p className="font-display mt-1 text-xl font-semibold text-[var(--green-deep)]">{m.title}</p>
                   <p className="mt-2 text-base leading-relaxed text-[var(--dim)]">{m.detail}</p>
                 </li>

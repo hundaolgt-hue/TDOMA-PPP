@@ -19,7 +19,11 @@
   --green-deep: #0a5439;    /* headings/emphasis */
   --ink: #12241b;           /* body text */
   --dim: #567064;           /* secondary text */
-  --orange: #f08a24;        /* the hint of orange — accents only */
+  --orange: #f08a24;        /* the hint of orange — graphics/fills only */
+  /* Accessible orange for TEXT. The bright accent above is 2.3:1 on our light
+     glass (fails WCAG AA); this darkened tone reads at 5.2:1. Use --orange for
+     bars, markers and fills (3:1 graphics bar), --orange-text for words. */
+  --orange-text: #9c5310;
   --orange-soft: #fdebd7;
   --glass: rgba(255, 255, 255, 0.55);
   --glass-strong: rgba(255, 255, 255, 0.72);

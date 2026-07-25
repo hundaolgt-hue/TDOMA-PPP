@@ -23,7 +23,7 @@ export default function Sensitivity({ progress }: ChapterProps) {
   return (
     <div className="flex h-full items-center justify-center">
       <div className="mx-auto w-full max-w-6xl px-6 md:px-10 2xl:max-w-[1500px]">
-        <p className="font-tech-label text-xs text-[var(--orange)]">11 · Sensitivity</p>
+        <p className="font-tech-label text-xs text-[var(--orange-text)]">11 · Sensitivity</p>
         <TextReveal progress={progress} start={0.04} end={0.16}>
           <h2 className="font-display mt-3 text-[clamp(2.2rem,4.5vw,4.5rem)] font-bold leading-tight text-[var(--green-deep)]">
             What moves the outcome.
@@ -52,12 +52,12 @@ export default function Sensitivity({ progress }: ChapterProps) {
               </div>
               <div>
                 <dt className="text-sm uppercase tracking-wider text-[var(--dim)]">Min DSCR</dt>
-                <dd className="font-display flex items-baseline gap-1.5 text-3xl font-bold tabular-nums 2xl:text-4xl" style={{ color: breach ? "var(--orange)" : "var(--green-deep)" }}>
+                <dd className="font-display flex items-baseline gap-1.5 text-3xl font-bold tabular-nums 2xl:text-4xl" style={{ color: breach ? "var(--orange-text)" : "var(--green-deep)" }}>
                   {active.minDscr.value.toFixed(2)}×<span className="text-base" aria-hidden>{breach ? "⚠" : "✓"}</span>
                 </dd>
               </div>
             </dl>
-            <p className="mt-4 rounded-xl p-3 text-sm" style={{ background: breach ? "var(--orange-soft)" : "rgba(14,122,82,0.08)", color: breach ? "#a85a12" : "var(--dim)" }}>{active.note}</p>
+            <p className="mt-4 rounded-xl p-3 text-sm" style={{ background: breach ? "var(--orange-soft)" : "rgba(14,122,82,0.08)", color: breach ? "var(--orange-text)" : "var(--dim)" }}>{active.note}</p>
           </div>
 
           <div className="glass-strong p-6 2xl:p-8" style={{ opacity: win(progress, 0.16, 0.3) }}>
@@ -79,7 +79,7 @@ export default function Sensitivity({ progress }: ChapterProps) {
                     >
                       <div className="flex justify-between text-xs">
                         <span style={{ color: i === idx ? "var(--green-deep)" : "var(--dim)", fontWeight: i === idx ? 600 : 400 }}>{s.label}</span>
-                        <span className="tabular-nums text-[var(--dim)]">{s.irrPct.value.toFixed(1)}% · DSCR {s.minDscr.value.toFixed(2)}×{isBreach && <span className="ml-1 font-semibold text-[var(--orange)]">▼ breach</span>}</span>
+                        <span className="tabular-nums text-[var(--dim)]">{s.irrPct.value.toFixed(1)}% · DSCR {s.minDscr.value.toFixed(2)}×{isBreach && <span className="ml-1 font-semibold text-[var(--orange-text)]">▼ breach</span>}</span>
                       </div>
                       <div className="mt-1 h-2.5 w-full overflow-hidden rounded-full bg-[var(--green)]/10">
                         <div className="h-full rounded-full" style={{ width: `${(s.irrPct.value / maxIrr) * 100 * t}%`, background: isBreach ? "var(--orange)" : "linear-gradient(90deg,var(--green-deep),var(--green))" }} />

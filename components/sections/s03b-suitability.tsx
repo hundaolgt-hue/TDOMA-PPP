@@ -35,7 +35,7 @@ export default function Suitability({ progress }: ChapterProps) {
       <div className="mx-auto w-full max-w-6xl 2xl:max-w-[1680px]">
         <div className="flex items-center gap-3">
           <span className="pulse-dot h-2.5 w-2.5 rounded-full bg-[var(--orange)]" />
-          <p className="label text-[var(--orange)]">04 · Site suitability · GIS multi-criteria screening</p>
+          <p className="label text-[var(--orange-text)]">04 · Site suitability · GIS multi-criteria screening</p>
         </div>
         <div className="mt-2 flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between">
           <TextReveal progress={progress} start={0.02} end={0.12}>

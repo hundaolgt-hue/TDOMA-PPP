@@ -71,7 +71,7 @@ export default function Profitability({ progress }: ChapterProps) {
       <div className="mx-auto w-full max-w-6xl px-6 md:px-10 2xl:max-w-[1600px]">
         <div className="flex items-center gap-3">
           <span className="pulse-dot h-2.5 w-2.5 rounded-full bg-[var(--orange)]" />
-          <p className="label text-[var(--orange)]">12 · Returns · audited IFRS · 13/13 checks pass</p>
+          <p className="label text-[var(--orange-text)]">12 · Returns · audited IFRS · 13/13 checks pass</p>
         </div>
         <TextReveal progress={progress} start={0.03} end={0.14}>
           <h2 className="font-display mt-2 text-[clamp(2.2rem,4.5vw,4.5rem)] font-bold leading-tight text-[var(--green-deep)]">
@@ -96,7 +96,7 @@ export default function Profitability({ progress }: ChapterProps) {
               <div className="flex items-center gap-3 text-[0.7rem] text-[var(--dim)]">
                 <span className="flex items-center gap-1"><span className="h-2.5 w-2.5 rounded-sm bg-[var(--green-deep)]" />Total</span>
                 <span className="flex items-center gap-1"><span className="h-2.5 w-2.5 rounded-sm bg-[var(--green)]" />Subtotal</span>
-                <span className="flex items-center gap-1"><span className="text-[var(--orange)]">▼</span>Deduction</span>
+                <span className="flex items-center gap-1"><span className="text-[var(--orange-text)]">▼</span>Deduction</span>
               </div>
             </div>
             <div className="relative mt-6 h-[20vh] min-h-[180px] pb-7 pt-5" role="img" aria-label={`Profit and loss bridge for the stabilised year: revenue ${fmtM(1610)} million ETB stepping down through deductions to profit after tax.`}>
@@ -117,7 +117,7 @@ export default function Profitability({ progress }: ChapterProps) {
                     <div key={p.label} className="relative flex-1">
                       {/* value label above the bar */}
                       <span className="absolute inset-x-0 text-center text-[0.62rem] font-semibold leading-none tabular-nums text-[var(--green-deep)]" style={{ top: `calc(${p.top}% - 1.05rem)`, opacity: t }}>
-                        {isStep && p.delta !== 0 && <span className="text-[var(--orange)]">{p.delta < 0 ? "▼ " : "▲ "}</span>}{fmtM(Math.abs(isStep ? p.delta : p.valueM))}
+                        {isStep && p.delta !== 0 && <span className="text-[var(--orange-text)]">{p.delta < 0 ? "▼ " : "▲ "}</span>}{fmtM(Math.abs(isStep ? p.delta : p.valueM))}
                       </span>
                       <div className="absolute inset-x-0.5 rounded-[3px]" style={{ top: `${p.top}%`, height: `${Math.max(1, p.h * t)}%`, background: color, opacity: 0.92 }} />
                       <span className="absolute inset-x-0 bottom-[-1.6rem] text-center text-[0.68rem] leading-tight text-[var(--dim)]">{p.short}</span>
@@ -135,7 +135,7 @@ export default function Profitability({ progress }: ChapterProps) {
             <div className="relative mt-4 h-[20vh] min-h-[170px]">
               {/* covenant line spanning the chart */}
               <div className="absolute inset-x-0 z-10 border-t-2 border-dashed border-[var(--orange)]/70" style={{ bottom: `${(1.3 / 5) * 100}%` }}>
-                <span className="absolute right-0 top-[-1.3rem] text-xs font-semibold text-[var(--orange)]">1.30× covenant</span>
+                <span className="absolute right-0 top-[-1.3rem] text-xs font-semibold text-[var(--orange-text)]">1.30× covenant</span>
               </div>
               <div className="flex h-full items-end justify-around gap-4">
                 {dscrByYear.map((d, i) => {

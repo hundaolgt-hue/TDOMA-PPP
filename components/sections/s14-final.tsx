@@ -25,7 +25,7 @@ export default function Final({ progress }: ChapterProps) {
 
       <div className="absolute inset-0 flex items-center justify-center p-6" style={{ opacity: closeIn }}>
         <div className="glass-strong grain relative max-w-2xl overflow-hidden p-10 text-center 2xl:p-14">
-          <p className="font-tech-label text-sm text-[var(--orange)]">Liiban Smart Mall</p>
+          <p className="font-tech-label text-sm text-[var(--orange-text)]">Liiban Smart Mall</p>
           <p className="font-display mt-3 text-4xl font-bold leading-tight text-[var(--green-deep)] md:text-5xl">
             A vertical trading city for Merkato.
           </p>
@@ -34,7 +34,7 @@ export default function Final({ progress }: ChapterProps) {
           </p>
           <div className="mt-6 inline-block">
             <span className="font-display text-3xl font-bold tracking-[0.3em] text-[var(--green-deep)]">
-              TDOMA<span className="text-[var(--orange)]">.</span>
+              TDOMA<span className="text-[var(--orange-text)]">.</span>
             </span>
           </div>
         </div>

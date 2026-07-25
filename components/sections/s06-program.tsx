@@ -36,7 +36,7 @@ export default function Program({ progress }: ChapterProps) {
       {/* Top title */}
       <div className="absolute inset-x-0 top-0 flex justify-center p-6 md:p-8">
         <div className="glass px-8 py-4 text-center">
-          <p className="label text-[var(--orange)]">06 · Programme</p>
+          <p className="label text-[var(--orange-text)]">06 · Programme</p>
           <h2 className="font-display text-3xl font-bold text-[var(--green-deep)] md:text-4xl">Program, ground to sky.</h2>
           <p className="mt-1 text-base text-[var(--dim)]">
             {zones.length} clusters · {totalNetGla.value.toLocaleString()} m² net GLA

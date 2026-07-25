@@ -35,7 +35,7 @@ export default function Phasing({ progress }: ChapterProps) {
       {/* Top title */}
       <div className="absolute inset-x-0 top-0 flex justify-center p-6 md:p-8">
         <div className="glass px-8 py-4 text-center">
-          <p className="label text-[var(--orange)]">07 · Delivery</p>
+          <p className="label text-[var(--orange-text)]">07 · Delivery</p>
           <h2 className="font-display text-3xl font-bold text-[var(--green-deep)] md:text-4xl">Built in six stages.</h2>
           <p className="mt-1 text-base text-[var(--dim)]">
             {constructionMonths.value} months · {(totalConstructionEtb.value / 1e9).toFixed(2)} bn ETB works
@@ -48,7 +48,7 @@ export default function Phasing({ progress }: ChapterProps) {
         <div className="holo hud p-7">
           <div className="flex items-center gap-2">
             <span className="pulse-dot h-2.5 w-2.5 rounded-full bg-[var(--orange)]" />
-            <span className="label text-[var(--orange)]">Stage {active + 1} / {n}</span>
+            <span className="label text-[var(--orange-text)]">Stage {active + 1} / {n}</span>
           </div>
           <h3 className="font-display mt-2 text-3xl font-bold text-[var(--green-deep)]">{phase.label}</h3>
           <p className="mt-1 font-display text-lg text-[var(--green)]">
@@ -91,7 +91,7 @@ export default function Phasing({ progress }: ChapterProps) {
               {phase.label} <span className="text-base font-medium text-[var(--dim)]">· {(phase.costEtb.value / M).toFixed(0)}M ETB</span>
             </p>
             <p className="label text-[var(--green)]">Preliminaries (BOQ A) {(preliminaries.value / M).toFixed(0)}M — span the whole programme</p>
-            <p className="font-display text-xl font-bold text-[var(--orange)]">
+            <p className="font-display text-xl font-bold text-[var(--orange-text)]">
               Cumulative <span className="tabular-nums">{(cumCost / 1e9).toFixed(2)}</span> bn ETB
             </p>
           </div>

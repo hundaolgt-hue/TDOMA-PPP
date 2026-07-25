@@ -32,7 +32,7 @@ export default function ScrollLogo() {
     >
       <div className="glass-strong px-3.5 py-1.5">
         <span className="font-display text-lg font-bold tracking-[0.22em] text-[var(--green-deep)] md:text-xl">
-          TDOMA<span className="text-[var(--orange)]">.</span>
+          TDOMA<span className="text-[var(--orange-text)]">.</span>
         </span>
       </div>
     </div>

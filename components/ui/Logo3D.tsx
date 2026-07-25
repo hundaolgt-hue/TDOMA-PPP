@@ -107,7 +107,7 @@ export default function Logo3D() {
       {!mounted && (
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="font-display text-sm font-bold tracking-[0.18em] text-[var(--green-deep)] md:text-base">
-            TDOMA<span className="text-[var(--orange)]">.</span>
+            TDOMA<span className="text-[var(--orange-text)]">.</span>
           </span>
         </div>
       )}
