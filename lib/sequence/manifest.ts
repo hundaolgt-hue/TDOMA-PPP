@@ -32,16 +32,17 @@ export const ch1Sequence: SequenceManifest = {
   path: (i) => frame("ch1", i),
 };
 
-// Turntable orbit for chapter 2 — decoded from revolve_video.mp4. Camera
-// revolves around the finished tower.
-export const ch2Sequence: SequenceManifest = {
-  count: 170,
-  path: (i) => frame("ch2", i),
-};
-
 // Programme separation film — decoded from Programs_video.mp4 (1080p, green).
 // Programmes light up in coloured, labelled bands ground-to-top.
 export const programSequence: SequenceManifest = {
   count: 81,
   path: (i) => frame("program", i),
+};
+
+// Closing navigation film for S14 — decoded from nav_video.mp4 (1080p @30fps,
+// 27s) to 191 frames @ 1280px. Aerial fly-around of the finished tower in its
+// Merkato context, resolving to the TDOMA sign-off.
+export const navSequence: SequenceManifest = {
+  count: 191,
+  path: (i) => frame("nav", i),
 };

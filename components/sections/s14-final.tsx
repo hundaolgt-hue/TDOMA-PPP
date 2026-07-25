@@ -3,12 +3,12 @@
 import type { ChapterProps } from "@/lib/scroll/ChapterShell";
 import { win, seg, clamp01 } from "@/lib/scroll/ease";
 import SequenceScrubber from "@/lib/sequence/SequenceScrubber";
-import { ch2Sequence } from "@/lib/sequence/manifest";
+import { navSequence } from "@/lib/sequence/manifest";
 
 /**
- * S14 — Final film & close. A last orbit of the finished tower, resolving to
- * the TDOMA sign-off over a glass panel.
- * PLACEHOLDER FOOTAGE: orbit render until the 1080p closing video arrives.
+ * S14 — Final navigation film & close. An aerial fly-around of the finished
+ * tower in its Merkato context (nav_video.mp4), resolving to the TDOMA
+ * sign-off over a glass panel.
  */
 export default function Final({ progress }: ChapterProps) {
   const scrubT = clamp01(seg(progress, 0.02, 0.72));
@@ -17,8 +17,8 @@ export default function Final({ progress }: ChapterProps) {
     <div className="relative h-full w-full overflow-hidden">
       <SequenceScrubber
         progress={scrubT}
-        manifest={ch2Sequence}
-        label="Liiban Smart Mall — closing film."
+        manifest={navSequence}
+        label="Liiban Smart Mall — closing navigation film."
         className="absolute inset-0 h-full w-full"
       />
       <div className="pointer-events-none absolute inset-0" style={{ opacity: closeIn, background: "linear-gradient(180deg, rgba(246,251,247,0.2), rgba(227,243,232,0.72))" }} />
