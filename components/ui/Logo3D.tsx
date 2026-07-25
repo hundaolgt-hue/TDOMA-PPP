@@ -17,6 +17,7 @@ type Action = { vy: number; vx: number; tiltZ: number; bob: number; pulse: numbe
 const ACTIONS: Action[] = [
   { vy: 0.55, vx: 0, tiltZ: 0, bob: 0.04, pulse: 0, scale: 1 }, // s1 hero — gentle drift
   { vy: 0.9, vx: 0, tiltZ: 0.18, bob: 0, pulse: 0, scale: 1 }, // s2 company — lean + spin
+  { vy: 0.5, vx: 0, tiltZ: -0.1, bob: 0.07, pulse: 0.03, scale: 1.02 }, // s2b values — steady counter-lean
   { vy: 0.35, vx: 0, tiltZ: -0.16, bob: 0.09, pulse: 0, scale: 1.04 }, // s3 rationale — float
   { vy: 1.9, vx: 0, tiltZ: 0, bob: 0, pulse: 0, scale: 1 }, // s4 ppp — fast spin
   { vy: 0.6, vx: 0.6, tiltZ: 0.12, bob: 0, pulse: 0, scale: 1 }, // s3b suitability I — analytical scan

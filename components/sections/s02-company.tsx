@@ -1,10 +1,10 @@
 "use client";
 
 import type { ChapterProps } from "@/lib/scroll/ChapterShell";
-import { win, lerp } from "@/lib/scroll/ease";
+import { win } from "@/lib/scroll/ease";
 import TextReveal from "@/components/ui/TextReveal";
 import Counter from "@/components/ui/Counter";
-import { sponsor, companyStats, milestones, vision, mission, coreValues } from "@/data/company";
+import { sponsor, companyStats, vision, mission } from "@/data/company";
 
 /**
  * S2 — Company profile: identity, vision, capacity and track record. All
@@ -68,39 +68,6 @@ export default function Company({ progress }: ChapterProps) {
             </div>
           </div>
 
-          {/* Core values — the Gadaa governance principles */}
-          <div className="mt-5">
-            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <p className="label text-[var(--green)]">Core values</p>
-              <span className="text-sm text-[var(--dim)]">Guided by the foundational Gadaa governance principles</span>
-            </div>
-            <ul className="mt-3 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              {coreValues.map((v, i) => {
-                const t = win(progress, 0.3 + i * 0.05, 0.44 + i * 0.05);
-                return (
-                  <li key={v.term} className="glass p-5 2xl:p-6" style={{ opacity: t, transform: `translateY(${lerp(14, 0, t)}px)` }}>
-                    <p className="font-display text-xl font-bold leading-tight text-[var(--green-deep)] 2xl:text-2xl">{v.term}</p>
-                    <p className="label mt-0.5 text-[var(--orange-text)]">{v.gloss}</p>
-                    <p className="mt-2.5 text-base leading-relaxed text-[var(--dim)]">{v.body}</p>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-
-          {/* Milestones */}
-          <ol className="mt-5 grid gap-4 md:grid-cols-4">
-            {milestones.map((m, i) => {
-              const t = win(progress, 0.54 + i * 0.06, 0.68 + i * 0.06);
-              return (
-                <li key={m.date} className="glass p-5" style={{ opacity: t, transform: `translateY(${lerp(14, 0, t)}px)` }}>
-                  <p className="label text-[var(--orange-text)]">{m.date}</p>
-                  <p className="font-display mt-1 text-xl font-semibold text-[var(--green-deep)]">{m.title}</p>
-                  <p className="mt-2 text-base leading-relaxed text-[var(--dim)]">{m.detail}</p>
-                </li>
-              );
-            })}
-          </ol>
         </div>
       </div>
     </div>
