@@ -25,6 +25,7 @@ export default function Rationale({ progress }: ChapterProps) {
       {/* Looping backdrop: the congested market the project answers to */}
       <BackgroundVideo
         src="/videos/merkato-problem.mp4"
+        srcWebm="/videos/merkato-problem.webm"
         poster="/videos/merkato-problem.jpg"
         label="Aerial loop of congested Merkato street trading"
         opacity={0.62}

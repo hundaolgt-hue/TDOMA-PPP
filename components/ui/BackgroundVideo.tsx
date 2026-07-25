@@ -17,6 +17,9 @@ const BP = process.env.NEXT_PUBLIC_BASE_PATH || "";
  */
 export default function BackgroundVideo({
   src,
+  /** Optional VP9/WebM source, offered first — smaller, and covers builds
+   *  shipped without the patent-encumbered H.264 decoder. */
+  srcWebm,
   poster,
   /** 0→1 opacity of the footage under the scrim. */
   opacity = 0.5,
@@ -25,6 +28,7 @@ export default function BackgroundVideo({
   label,
 }: {
   src: string;
+  srcWebm?: string;
   poster: string;
   opacity?: number;
   scrim?: number;
@@ -60,14 +64,16 @@ export default function BackgroundVideo({
           ref={ref}
           className="h-full w-full object-cover"
           style={{ opacity }}
-          src={`${BP}${src}`}
           poster={`${BP}${poster}`}
           muted
           loop
           playsInline
           preload="metadata"
           aria-label={label}
-        />
+        >
+          {srcWebm && <source src={`${BP}${srcWebm}`} type="video/webm" />}
+          <source src={`${BP}${src}`} type="video/mp4" />
+        </video>
       )}
       {/* Mint scrim — keeps the section's light-glass identity and text contrast */}
       <div
