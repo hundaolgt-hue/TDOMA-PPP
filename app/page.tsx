@@ -15,7 +15,6 @@ import Company from "@/components/sections/s02-company";
 import Rationale from "@/components/sections/s03-rationale";
 import Suitability from "@/components/sections/s03b-suitability";
 import SuitabilityMethod from "@/components/sections/s03c-suitability-method";
-import SuitabilitySites from "@/components/sections/s03d-suitability-sites";
 import PPP from "@/components/sections/s04-ppp";
 import Massing from "@/components/sections/s05-massing";
 import Program from "@/components/sections/s06-program";
@@ -33,10 +32,9 @@ const sections = [
   [Hero, "s1", "Introduction film", 320, true],
   [Company, "s2", "Company profile", 250, false],
   [Rationale, "s3", "Project rationale", 250, false],
+  [PPP, "s4", "PPP structure", 230, false],
   [Suitability, "s3b", "Site suitability — live heat map", 100, false],
   [SuitabilityMethod, "s3c", "Site suitability — the screen", 100, false],
-  [SuitabilitySites, "s3d", "Site suitability — candidate sites", 100, false],
-  [PPP, "s4", "PPP structure", 230, false],
   [Massing, "s5", "Massing and metrics", 250, false],
   [Program, "s6", "Programme separation film", 320, true],
   [Phasing, "s7", "Construction phasing film", 340, true],

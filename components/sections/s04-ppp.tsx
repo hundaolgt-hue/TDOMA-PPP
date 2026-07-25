@@ -18,7 +18,7 @@ export default function PPP({ progress }: ChapterProps) {
   return (
     <div className="flex h-full items-center justify-center">
       <div className="mx-auto w-full max-w-6xl px-6 md:px-10 2xl:max-w-[1500px]">
-        <p className="font-tech-label text-xs text-[var(--orange)]">04 · Structure</p>
+        <p className="font-tech-label text-xs text-[var(--orange)]">03 · Structure</p>
         <TextReveal progress={progress} start={0.04} end={0.16}>
           <h2 className="font-display mt-3 text-[clamp(2.2rem,4.5vw,4.5rem)] font-bold leading-tight text-[var(--green-deep)]">
             A 70 / 30 public-private partnership.

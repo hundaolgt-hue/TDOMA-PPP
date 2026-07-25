@@ -23,7 +23,7 @@ export default function SuitabilityMethod({ progress }: ChapterProps) {
       <div className="mx-auto w-full max-w-6xl 2xl:max-w-[1720px]">
         <div className="flex items-center gap-3">
           <span className="pulse-dot h-2.5 w-2.5 rounded-full bg-[var(--orange)]" />
-          <p className="label text-[var(--orange)]">03 · Site suitability · the screen</p>
+          <p className="label text-[var(--orange)]">04 · Site suitability · the screen</p>
         </div>
         <TextReveal progress={progress} start={0.02} end={0.12}>
           <h2 className="font-display mt-2 text-[clamp(1.9rem,3.6vw,3.6rem)] font-bold leading-tight text-[var(--green-deep)]">
