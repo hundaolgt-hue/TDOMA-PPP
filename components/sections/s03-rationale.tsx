@@ -33,7 +33,7 @@ export default function Rationale({ progress }: ChapterProps) {
       />
       <div className="relative mx-auto w-full max-w-6xl px-6 md:px-10 2xl:max-w-[1500px]">
         {/* Heading rides its own glass plate so it stays legible over the film */}
-        <div className="glass-strong inline-block max-w-full px-7 py-5 2xl:px-9 2xl:py-6">
+        <div className="glass-strong dots-y relative inline-block max-w-full px-7 py-5 2xl:px-9 2xl:py-6">
           <p className="font-tech-label text-xs text-[var(--orange-text)]">02 · Why this project</p>
           <TextReveal progress={progress} start={0.04} end={0.16}>
             <h2 className="font-display mt-2 text-[clamp(2.2rem,4.5vw,4.5rem)] font-bold leading-tight text-[var(--green-deep)]">
