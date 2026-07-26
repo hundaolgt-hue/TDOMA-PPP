@@ -12,28 +12,40 @@ import { interiorSequence } from "@/lib/sequence/manifest";
  */
 const beats = [
   {
-    at: 0.02,
-    kicker: "Ground concourse",
+    at: 0.0,
+    kicker: "Trading hall",
     title: "A market that finally has a roof.",
-    body: "Merkato’s trade brought indoors: wide, daylit aisles, formal stalls and clear circulation — the same commerce, on serviced floorplate.",
+    body: "Merkato’s trade brought indoors: daylit aisles and formal stall bays, so merchants keep their shopfront and footfall on serviced floorplate.",
   },
   {
-    at: 0.3,
-    kicker: "Trading floor",
-    title: "Every trader keeps their shopfront.",
-    body: "Modular stall bays let existing merchants relocate without losing display frontage or footfall, each with power, storage and a lockable unit.",
+    at: 0.15,
+    kicker: "Grand atrium",
+    title: "Where the shareholders meet.",
+    body: "The full-height atrium doubles as assembly space — the room in which a company owned by its own merchants can convene at scale.",
+  },
+  {
+    at: 0.4,
+    kicker: "Structured parking",
+    title: "Vehicles off the street.",
+    body: "Automated stacker bays with live availability take parking and loading off the district’s roads — congestion answered inside the plot.",
   },
   {
     at: 0.56,
-    kicker: "Atrium",
-    title: "Daylight all the way down.",
-    body: "A full-height atrium carries daylight to the lower trading levels, cutting lighting load and making wayfinding legible from any floor.",
+    kicker: "Bonded warehouse",
+    title: "Storage consolidated under one roof.",
+    body: "Racked, barcoded pallet positions with dedicated goods circulation replace the dispersed storage that fragments Merkato’s logistics today.",
   },
   {
-    at: 0.8,
-    kicker: "Branded concourse",
-    title: "One address for the district.",
-    body: "The TDOMA concourse anchors the arrival sequence — reception, vertical cores and tenant services under a single managed identity.",
+    at: 0.72,
+    kicker: "Retail arcade",
+    title: "One managed address.",
+    body: "Reception, wayfinding, customer service and vertical cores anchor the arrival sequence for shoppers and tenants alike.",
+  },
+  {
+    at: 0.88,
+    kicker: "Dining atrium",
+    title: "Reasons to stay all day.",
+    body: "Food and beverage under the skylight extend dwell time, turning a wholesale destination into a place the city spends its day.",
   },
 ];
 
