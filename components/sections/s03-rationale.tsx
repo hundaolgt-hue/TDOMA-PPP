@@ -28,23 +28,26 @@ export default function Rationale({ progress }: ChapterProps) {
         srcWebm="/videos/merkato-problem.webm"
         poster="/videos/merkato-problem.jpg"
         label="Aerial loop of congested Merkato street trading"
-        opacity={0.62}
-        scrim={0.66}
+        opacity={1}
+        scrim={0}
       />
       <div className="relative mx-auto w-full max-w-6xl px-6 md:px-10 2xl:max-w-[1500px]">
-        <p className="font-tech-label text-xs text-[var(--orange-text)]">02 · Why this project</p>
-        <TextReveal progress={progress} start={0.04} end={0.16}>
-          <h2 className="font-display mt-3 text-[clamp(2.2rem,4.5vw,4.5rem)] font-bold leading-tight text-[var(--green-deep)]">
-            Merkato works despite itself.
-          </h2>
-        </TextReveal>
+        {/* Heading rides its own glass plate so it stays legible over the film */}
+        <div className="glass-strong inline-block max-w-full px-7 py-5 2xl:px-9 2xl:py-6">
+          <p className="font-tech-label text-xs text-[var(--orange-text)]">02 · Why this project</p>
+          <TextReveal progress={progress} start={0.04} end={0.16}>
+            <h2 className="font-display mt-2 text-[clamp(2.2rem,4.5vw,4.5rem)] font-bold leading-tight text-[var(--green-deep)]">
+              Merkato works despite itself.
+            </h2>
+          </TextReveal>
+        </div>
 
         {/* Diagram: four problems converge on one response */}
         <div className="mt-10 grid gap-4 md:grid-cols-4">
           {problems.map((p, i) => {
             const t = win(progress, 0.14 + i * 0.07, 0.26 + i * 0.07);
             return (
-              <div key={p.k} className="glass p-5" style={{ opacity: t, transform: `translateY(${lerp(16, 0, t)}px)` }}>
+              <div key={p.k} className="glass-strong p-5" style={{ opacity: t, transform: `translateY(${lerp(16, 0, t)}px)` }}>
                 <p className="font-tech-label text-xs text-[var(--orange-text)]">{p.k}</p>
                 <p className="font-display mt-1 text-xl font-semibold text-[var(--green-deep)]">{p.title}</p>
                 <p className="mt-2 text-xs leading-relaxed text-[var(--dim)]">{p.text}</p>

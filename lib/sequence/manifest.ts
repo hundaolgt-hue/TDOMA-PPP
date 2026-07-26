@@ -39,6 +39,14 @@ export const programSequence: SequenceManifest = {
   path: (i) => frame("program", i),
 };
 
+// Interior walk-through for S13b — decoded from the interior film (1080p @30fps,
+// 35s) to 213 frames @ 1280px. Scroll-scrubbed tour of the trading hall:
+// stalls, atrium and the TDOMA-branded concourse.
+export const interiorSequence: SequenceManifest = {
+  count: 213,
+  path: (i) => frame("interior", i),
+};
+
 // Closing navigation film for S14 — decoded from nav_video.mp4 (1080p @30fps,
 // 27s) to 191 frames @ 1280px. Aerial fly-around of the finished tower in its
 // Merkato context, resolving to the TDOMA sign-off.

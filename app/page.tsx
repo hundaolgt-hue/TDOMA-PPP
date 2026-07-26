@@ -4,11 +4,7 @@
 // cannot cross the RSC boundary. Metadata lives in layout.tsx.
 import SmoothScroll from "@/lib/scroll/SmoothScroll";
 import ChapterShell from "@/lib/scroll/ChapterShell";
-import dynamic from "next/dynamic";
-
-// Code-split the WebGL logo (three.js) into its own async chunk so it never
-// weighs down the initial hero load.
-const Logo3D = dynamic(() => import("@/components/ui/Logo3D"), { ssr: false });
+import ScrollLogo from "@/components/ui/ScrollLogo";
 
 import Hero from "@/components/sections/s01-hero";
 import Company from "@/components/sections/s02-company";
@@ -26,6 +22,7 @@ import Revenue from "@/components/sections/s10-revenue";
 import Sensitivity from "@/components/sections/s11-sensitivity";
 import Profitability from "@/components/sections/s12-profitability";
 import Gallery from "@/components/sections/s13-gallery";
+import Interior from "@/components/sections/s13b-interior";
 import Final from "@/components/sections/s14-final";
 
 // [component, id, aria, heightVh, isVideo]
@@ -46,13 +43,14 @@ const sections = [
   [Sensitivity, "s11", "Sensitivity analysis", 230, false],
   [Profitability, "s12", "Profitability", 250, false],
   [Gallery, "s13", "Gallery", 230, false],
+  [Interior, "s13b", "Interior walk-through", 340, true],
   [Final, "s14", "Closing film", 300, true],
 ] as const;
 
 export default function Page() {
   return (
     <SmoothScroll>
-      <Logo3D />
+      <ScrollLogo />
       <main>
         {sections.map(([Comp, id, aria, h, isVideo]) => (
           <ChapterShell key={id} id={id} heightVh={h} ariaLabel={aria} surface={!isVideo} pin={isVideo}>

@@ -75,21 +75,27 @@ export default function BackgroundVideo({
           <source src={`${BP}${src}`} type="video/mp4" />
         </video>
       )}
-      {/* Mint scrim — keeps the section's light-glass identity and text contrast */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: `linear-gradient(165deg,
-            rgba(246,251,247,${scrim}) 0%,
-            rgba(227,243,232,${Math.min(1, scrim + 0.06)}) 45%,
-            rgba(207,233,217,${Math.min(1, scrim + 0.1)}) 100%)`,
-        }}
-      />
-      {/* Soft vignette so the centre content sits on the calmest area */}
-      <div
-        className="absolute inset-0"
-        style={{ background: "radial-gradient(120% 80% at 50% 45%, rgba(255,255,255,0.55), transparent 70%)" }}
-      />
+      {/* Mint scrim — keeps the section's light-glass identity and text contrast.
+          scrim={0} shows the footage at full strength; foreground panels then
+          carry legibility themselves via their backdrop blur. */}
+      {scrim > 0 && (
+        <>
+          <div
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(165deg,
+                rgba(246,251,247,${scrim}) 0%,
+                rgba(227,243,232,${Math.min(1, scrim + 0.06)}) 45%,
+                rgba(207,233,217,${Math.min(1, scrim + 0.1)}) 100%)`,
+            }}
+          />
+          {/* Soft vignette so the centre content sits on the calmest area */}
+          <div
+            className="absolute inset-0"
+            style={{ background: "radial-gradient(120% 80% at 50% 45%, rgba(255,255,255,0.55), transparent 70%)" }}
+          />
+        </>
+      )}
     </div>
   );
 }
