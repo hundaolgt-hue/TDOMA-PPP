@@ -85,7 +85,7 @@ export default function Cashflow({ progress }: ChapterProps) {
                     </span>
                     <span className="flex-1 truncate text-[var(--ink)]" title={m.label}>{m.label}</span>
                     <span className="shrink-0 tabular-nums text-[var(--dim)]">{m.date}</span>
-                    <span className="w-[3.6rem] shrink-0 text-right font-semibold tabular-nums text-[var(--green-deep)]">M{m.month}</span>
+                    <span className="w-[3.6rem] shrink-0 text-right font-semibold tabular-nums text-[var(--green-deep)]">mo {m.month}</span>
                   </li>
                 );
               })}
@@ -118,6 +118,10 @@ export default function Cashflow({ progress }: ChapterProps) {
                 );
               })}
             </ul>
+            <p className="mt-3 border-t border-[var(--green)]/15 pt-2.5 text-[0.7rem] leading-relaxed text-[var(--dim)]">
+              {dist[0].n} zero-float items = {programmeStats.criticalActivities.value} activities on the critical path plus the{" "}
+              {programmeStats.contingencyWeeks.value}-week contingency buffer carried as the final item.
+            </p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
