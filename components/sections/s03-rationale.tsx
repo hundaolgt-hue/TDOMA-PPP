@@ -32,11 +32,12 @@ export default function Rationale({ progress }: ChapterProps) {
         scrim={0}
       />
       <div className="relative mx-auto w-full max-w-6xl px-6 md:px-10 2xl:max-w-[1500px]">
-        {/* Heading rides its own glass plate so it stays legible over the film */}
-        <div className="glass-strong dots-y relative inline-block max-w-full px-7 py-5 2xl:px-9 2xl:py-6">
-          <p className="font-tech-label text-xs text-[var(--orange-text)]">02 · Why this project</p>
+        {/* Heading rides its own dark glass plate — same overlay language as the
+            interior/exterior walk-through captions */}
+        <div className="glass-dark dots-y relative inline-block max-w-full px-7 py-5 2xl:px-9 2xl:py-6">
+          <p className="font-tech-label text-xs text-[#ffd9a8]">02 · Why this project</p>
           <TextReveal progress={progress} start={0.04} end={0.16}>
-            <h2 className="font-display mt-2 text-[clamp(2.2rem,4.5vw,4.5rem)] font-bold leading-tight text-[var(--green-deep)]">
+            <h2 className="font-display mt-2 text-[clamp(2.2rem,4.5vw,4.5rem)] font-bold leading-tight text-white">
               Merkato works despite itself.
             </h2>
           </TextReveal>
@@ -47,11 +48,11 @@ export default function Rationale({ progress }: ChapterProps) {
           {problems.map((p, i) => {
             const t = win(progress, 0.14 + i * 0.07, 0.26 + i * 0.07);
             return (
-              <div key={p.k} className="glass-strong p-5" style={{ opacity: t, transform: `translateY(${lerp(16, 0, t)}px)` }}>
-                <p className="font-tech-label text-xs text-[var(--orange-text)]">{p.k}</p>
-                <p className="font-display mt-1 text-xl font-semibold text-[var(--green-deep)]">{p.title}</p>
-                <p className="mt-2 text-xs leading-relaxed text-[var(--dim)]">{p.text}</p>
-                <p className="mt-3 text-xs uppercase tracking-wider text-[var(--dim)]/80">{p.src}</p>
+              <div key={p.k} className="glass-dark p-5" style={{ opacity: t, transform: `translateY(${lerp(16, 0, t)}px)` }}>
+                <p className="font-tech-label text-xs text-[#ffd9a8]">{p.k}</p>
+                <p className="font-display mt-1 text-xl font-semibold text-white">{p.title}</p>
+                <p className="mt-2 text-xs leading-relaxed text-white/85">{p.text}</p>
+                <p className="mt-3 text-xs uppercase tracking-wider text-white/60">{p.src}</p>
               </div>
             );
           })}
@@ -66,9 +67,9 @@ export default function Rationale({ progress }: ChapterProps) {
           </svg>
         </div>
 
-        <div className="glass-strong mx-auto max-w-3xl p-7 text-center" style={{ opacity: win(progress, 0.5, 0.64), transform: `scale(${lerp(0.96, 1, win(progress, 0.5, 0.64))})` }}>
-          <p className="font-tech-label text-sm text-[var(--green)]">The response</p>
-          <p className="font-display mt-2 text-2xl font-semibold leading-snug text-[var(--green-deep)] md:text-3xl">
+        <div className="glass-dark mx-auto max-w-3xl p-7 text-center" style={{ opacity: win(progress, 0.5, 0.64), transform: `scale(${lerp(0.96, 1, win(progress, 0.5, 0.64))})` }}>
+          <p className="font-tech-label text-sm text-[#ffd9a8]">The response</p>
+          <p className="font-display mt-2 text-2xl font-semibold leading-snug text-white md:text-3xl">
             One vertical trading city: formal space, consolidated logistics, and digital rails — on 5,000 m² in the heart of the district.
           </p>
         </div>
