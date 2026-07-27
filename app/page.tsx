@@ -18,6 +18,8 @@ import ProgramStack from "@/components/sections/s05b-stack";
 import MassingConfig from "@/components/sections/s05c-config";
 import Program from "@/components/sections/s06-program";
 import Phasing from "@/components/sections/s07-phasing";
+import Programme from "@/components/sections/s07b-programme";
+import Cashflow from "@/components/sections/s07c-cashflow";
 import Assumptions from "@/components/sections/s08-assumptions";
 import Capex from "@/components/sections/s09-capex";
 import Revenue from "@/components/sections/s10-revenue";
@@ -41,6 +43,8 @@ const sections = [
   [MassingConfig, "s5c", "Massing metrics and configuration", 100, false],
   [Program, "s6", "Programme separation film", 320, true],
   [Phasing, "s7", "Construction phasing film", 340, true],
+  [Programme, "s7b", "Construction programme CPM Gantt", 100, false],
+  [Cashflow, "s7c", "Cash-flow S-curve, milestones and float", 100, false],
   [Assumptions, "s8", "Financial assumptions", 250, false],
   [Capex, "s9", "Capex", 250, false],
   [Revenue, "s10", "Revenue", 270, false],
