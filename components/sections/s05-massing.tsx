@@ -1,76 +1,163 @@
 "use client";
 
+import { useState } from "react";
 import type { ChapterProps } from "@/lib/scroll/ChapterShell";
-import { win, lerp, seg, clamp01 } from "@/lib/scroll/ease";
+import { win, lerp } from "@/lib/scroll/ease";
 import TextReveal from "@/components/ui/TextReveal";
 import Counter from "@/components/ui/Counter";
 import { massing, totalNetGla } from "@/data/program";
+import { calloutsMassing, families, massingCaveat } from "@/data/massing";
+
+const BP = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
+// Where each callout pins onto the render, top → bottom.
+const pins: Record<string, { top: string; left: string }> = {
+  pavilion: { top: "13%", left: "56%" },
+  tower: { top: "34%", left: "48%" },
+  terraces: { top: "50%", left: "62%" },
+  podium: { top: "70%", left: "44%" },
+  plaza: { top: "86%", left: "52%" },
+};
 
 /**
- * S5 — Massing concept & building metrics. A schematic stack (3 basements →
- * podium → tower → roof crown) assembles from scroll, beside sourced massing
- * figures. All values from the Area Allocation Matrix (page 5 massing +
- * cluster total).
+ * S5a — Massing concept. Headline massing stats, the annotated building with
+ * callouts that light up on hover, and the four programme families the
+ * clusters roll up into.
  */
-const stack = [
-  { id: "roof", label: "Roof crown", hPct: 6, color: "var(--orange)" },
-  { id: "tower", label: "Tower · L5–L15", hPct: 44, color: "var(--green)" },
-  { id: "podium", label: "Podium · G–L4", hPct: 26, color: "var(--green-deep)" },
-  { id: "basement", label: "3 basement levels", hPct: 24, color: "#7d8a99" },
-];
-
-const metrics = [
-  { label: "Plot area", value: massing.plotAreaSqm.value, suffix: " m²" },
-  { label: "Above-grade gross", value: massing.aboveGradeGrossSqm.value, suffix: " m²" },
-  { label: "Basement gross", value: massing.basementGrossSqm.value, suffix: " m²" },
-  { label: "Total net GLA", value: totalNetGla.value, suffix: " m²" },
-  { label: "Total height", value: massing.totalHeightM.value, suffix: " m", decimals: 1 },
-  { label: "Plot ratio (FAR)", value: massing.farRatio.value, suffix: "×", decimals: 1 },
-];
-
 export default function Massing({ progress }: ChapterProps) {
-  const assemble = clamp01(seg(progress, 0.12, 0.7));
-  return (
-    <div className="flex h-full items-center justify-center">
-      <div className="mx-auto w-full max-w-6xl px-6 md:px-10 2xl:max-w-[1500px]">
-        <p className="font-tech-label text-xs text-[var(--orange-text)]">05 · Massing</p>
-        <TextReveal progress={progress} start={0.04} end={0.16}>
-          <h2 className="font-display mt-3 text-[clamp(2.2rem,4.5vw,4.5rem)] font-bold leading-tight text-[var(--green-deep)]">
-            G+15 over three basements.
-          </h2>
-        </TextReveal>
+  const [hot, setHot] = useState<string | null>(null);
 
-        <div className="mt-8 grid items-center gap-8 md:grid-cols-[340px_1fr] 2xl:grid-cols-[440px_1fr]">
-          {/* Schematic stack */}
-          <div className="glass-strong flex h-[52vh] flex-col-reverse gap-1.5 p-6" aria-hidden>
-            {stack.map((s, i) => {
-              const t = win(progress, 0.14 + i * 0.12, 0.32 + i * 0.12);
-              return (
-                <div key={s.id} className="flex items-center gap-3" style={{ height: `${s.hPct}%` }}>
-                  <div className="h-full flex-1 rounded-md" style={{ background: s.color, opacity: lerp(0.15, 0.9, t), transform: `scaleY(${lerp(0.2, 1, t)})`, transformOrigin: "bottom" }} />
-                  <span className="w-28 shrink-0 text-sm font-medium text-[var(--dim)]" style={{ opacity: t }}>{s.label}</span>
-                </div>
-              );
-            })}
+  const stats = [
+    { label: "Above grade", value: massing.storeys.value, prefix: "G+", suffix: "", dec: 0 },
+    { label: "Basements", value: 3, prefix: "", suffix: "", dec: 0 },
+    { label: "Net GLA", value: totalNetGla.value, prefix: "~", suffix: " m²", dec: 0 },
+    { label: "Total height", value: massing.totalHeightM.value, prefix: "~", suffix: " m", dec: 1 },
+  ];
+
+  return (
+    <div className="grid-bg flex h-full flex-col justify-center px-6 py-[6vh] md:px-10 2xl:px-16">
+      <div className="mx-auto w-full max-w-6xl 2xl:max-w-[1680px]">
+        <p className="label text-[var(--orange-text)]">04 · Massing concept &amp; program configuration</p>
+        <div className="mt-2 flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <TextReveal progress={progress} start={0.02} end={0.12}>
+            <h2 className="font-display text-[clamp(2rem,4vw,4rem)] font-bold leading-tight text-[var(--green-deep)]">
+              A layered trading engine with a civic heart.
+            </h2>
+          </TextReveal>
+
+          {/* Hero stat chips */}
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:w-[44rem]">
+            {stats.map((s, i) => (
+              <div key={s.label} className="glass lift p-3.5 text-center" style={{ opacity: win(progress, 0.06 + i * 0.03, 0.2 + i * 0.03) }}>
+                <p className="font-display text-2xl font-bold leading-none text-[var(--green-deep)] 2xl:text-3xl">
+                  {s.prefix}
+                  <Counter progress={progress} start={0.08} end={0.34} value={s.value} decimals={s.dec} suffix={s.suffix} />
+                </p>
+                <p className="label mt-1.5 text-[var(--green)]">{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-5 grid gap-5 lg:grid-cols-[1.35fr_1fr]">
+          {/* Annotated massing render */}
+          <div className="holo overflow-hidden p-2" style={{ opacity: win(progress, 0.1, 0.24) }}>
+            <div className="relative overflow-hidden rounded-[calc(var(--glass-radius)-8px)]" style={{ aspectRatio: "16 / 11" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${BP}/gallery/render-06-golden-aerial.webp`}
+                alt="Massing concept — podium, tower and rooftop pavilion in context"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+              <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(10,30,22,0.05),rgba(10,30,22,0.35))]" />
+
+              <span className="label glass-dark absolute left-3 top-3 rounded-md px-2.5 py-1 text-white">Massing concept</span>
+
+              {/* Callout pins — hover to light one up */}
+              {calloutsMassing.map((c, i) => {
+                const t = win(progress, 0.2 + i * 0.05, 0.34 + i * 0.05);
+                const on = hot === c.id;
+                return (
+                  <button
+                    key={c.id}
+                    type="button"
+                    onPointerEnter={() => setHot(c.id)}
+                    onPointerLeave={() => setHot(null)}
+                    onFocus={() => setHot(c.id)}
+                    onBlur={() => setHot(null)}
+                    aria-label={`${c.label}: ${c.detail}`}
+                    className="absolute z-10 h-4 w-4 rounded-full"
+                    style={{
+                      top: pins[c.id].top,
+                      left: pins[c.id].left,
+                      opacity: t,
+                      background: on ? "var(--orange)" : "rgba(255,255,255,0.9)",
+                      boxShadow: on
+                        ? "0 0 0 6px rgba(240,138,36,0.3), 0 0 16px rgba(240,138,36,0.7)"
+                        : "0 0 0 4px rgba(255,255,255,0.28)",
+                      transition: "background 200ms var(--ease-glass), box-shadow 200ms var(--ease-glass), transform 200ms var(--ease-glass)",
+                      transform: `translate(-50%,-50%) scale(${on ? 1.25 : 1})`,
+                    }}
+                  />
+                );
+              })}
+            </div>
           </div>
 
-          {/* Metrics */}
-          <dl className="grid grid-cols-2 gap-4 lg:grid-cols-3">
-            {metrics.map((m, i) => {
-              const t = win(progress, 0.2 + i * 0.05, 0.36 + i * 0.05);
+          {/* Callout legend — hovering a row lights its pin, and vice versa */}
+          <ul className="flex flex-col gap-2.5">
+            {calloutsMassing.map((c, i) => {
+              const t = win(progress, 0.18 + i * 0.05, 0.32 + i * 0.05);
+              const on = hot === c.id;
               return (
-                <div key={m.label} className="glass p-5" style={{ opacity: t, transform: `translateY(${lerp(14, 0, t)}px)` }}>
-                  <dt className="text-sm uppercase tracking-wider text-[var(--dim)]">{m.label}</dt>
-                  <dd className="font-display mt-1 text-2xl font-semibold text-[var(--green-deep)] 2xl:text-3xl">
-                    <Counter progress={progress} start={0.24} end={0.5} value={m.value} decimals={m.decimals ?? 0} suffix={m.suffix} />
-                  </dd>
-                </div>
+                <li
+                  key={c.id}
+                  onPointerEnter={() => setHot(c.id)}
+                  onPointerLeave={() => setHot(null)}
+                  className="glass cursor-default p-3.5 2xl:p-4"
+                  style={{
+                    opacity: t,
+                    transform: `translateX(${lerp(14, 0, t)}px)`,
+                    borderColor: on ? "rgba(240,138,36,0.65)" : undefined,
+                    boxShadow: on ? "var(--shadow-lift)" : undefined,
+                    transition: "border-color 200ms var(--ease-glass), box-shadow 200ms var(--ease-glass)",
+                  }}
+                >
+                  <div className="flex items-baseline gap-2">
+                    <span
+                      className="h-2 w-2 shrink-0 rounded-full"
+                      style={{ background: on ? "var(--orange)" : "var(--green)", transition: "background 200ms" }}
+                    />
+                    <p className="font-display text-base font-semibold text-[var(--green-deep)]">{c.label}</p>
+                  </div>
+                  <p className="mt-0.5 pl-4 text-sm leading-relaxed text-[var(--dim)]">{c.detail}</p>
+                </li>
               );
             })}
-          </dl>
+          </ul>
         </div>
-        {/* assemble drives the stack via per-layer windows; kept referenced for scrub-stability */}
-        <span className="sr-only">{Math.round(assemble * 100)}</span>
+
+        {/* Programme families */}
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {families.map((f, i) => {
+            const t = win(progress, 0.5 + i * 0.04, 0.64 + i * 0.04);
+            return (
+              <div key={f.id} className="holo lift p-4 2xl:p-5" style={{ opacity: t, transform: `translateY(${lerp(14, 0, t)}px)` }}>
+                <div className="flex items-baseline justify-between gap-2">
+                  <p className="font-display text-base font-bold text-[var(--green-deep)]">{f.label}</p>
+                  <p className="font-display text-xl font-bold tabular-nums text-[var(--orange-text)]">~{f.sharePct}%</p>
+                </div>
+                <p className="mt-1 text-sm leading-relaxed text-[var(--dim)]">{f.detail}</p>
+                <div className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-[var(--green)]/10">
+                  <div className="h-full rounded-full" style={{ width: `${f.sharePct * t}%`, background: "linear-gradient(90deg,var(--green-deep),var(--green))" }} />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <p className="mt-4 text-sm leading-relaxed text-[var(--dim)]">{massingCaveat}</p>
       </div>
     </div>
   );

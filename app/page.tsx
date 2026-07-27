@@ -14,6 +14,8 @@ import Suitability from "@/components/sections/s03b-suitability";
 import SuitabilityMethod from "@/components/sections/s03c-suitability-method";
 import PPP from "@/components/sections/s04-ppp";
 import Massing from "@/components/sections/s05-massing";
+import ProgramStack from "@/components/sections/s05b-stack";
+import MassingConfig from "@/components/sections/s05c-config";
 import Program from "@/components/sections/s06-program";
 import Phasing from "@/components/sections/s07-phasing";
 import Assumptions from "@/components/sections/s08-assumptions";
@@ -34,7 +36,9 @@ const sections = [
   [PPP, "s4", "PPP structure", 230, false],
   [Suitability, "s3b", "Site suitability — live heat map", 100, false],
   [SuitabilityMethod, "s3c", "Site suitability — the screen", 100, false],
-  [Massing, "s5", "Massing and metrics", 250, false],
+  [Massing, "s5", "Massing concept", 100, false],
+  [ProgramStack, "s5b", "Program stack and net GLA", 100, false],
+  [MassingConfig, "s5c", "Massing metrics and configuration", 100, false],
   [Program, "s6", "Programme separation film", 320, true],
   [Phasing, "s7", "Construction phasing film", 340, true],
   [Assumptions, "s8", "Financial assumptions", 250, false],
