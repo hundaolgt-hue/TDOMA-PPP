@@ -8,6 +8,10 @@ import GlaDonut from "@/components/ui/GlaDonut";
 import { zones, totalNetGla } from "@/data/program";
 import { stackLevels, bands } from "@/data/massing";
 
+// Shared row pitch: the slab silhouette and the level table are laid out on
+// the same rhythm so each slab sits on its own table row.
+const ROW_H = 26;
+
 const bandColor = Object.fromEntries(bands.map((b) => [b.id, b.color])) as Record<string, string>;
 
 /**
@@ -44,8 +48,9 @@ export default function ProgramStack({ progress }: ChapterProps) {
             </div>
 
             <div className="mt-3 grid gap-4 sm:grid-cols-[140px_1fr]">
-              {/* Slab silhouette */}
-              <div className="flex flex-col justify-center gap-[3px]" aria-hidden>
+              {/* Slab silhouette — one row per level, on the same pitch as the
+                  table beside it so the two read as a single object */}
+              <div className="flex flex-col gap-[2px]" aria-hidden>
                 {stackLevels.map((l, i) => {
                   const t = win(progress, 0.08 + (stackLevels.length - 1 - i) * 0.018, 0.2 + (stackLevels.length - 1 - i) * 0.018);
                   const on = hotLevel === l.id;
@@ -54,18 +59,23 @@ export default function ProgramStack({ progress }: ChapterProps) {
                       key={l.id}
                       onPointerEnter={() => setHotLevel(l.id)}
                       onPointerLeave={() => setHotLevel(null)}
-                      className="mx-auto rounded-[3px]"
-                      style={{
-                        width: `${widthFor(l.areaSqm) * (on ? 1.08 : 1)}%`,
-                        height: l.band === "podium" || l.band === "basement" ? 13 : 9,
-                        background: bandColor[l.band],
-                        opacity: t * (hotLevel && !on ? 0.42 : 1),
-                        transform: `scaleX(${lerp(0.4, 1, t)})`,
-                        boxShadow: on ? "0 0 14px rgba(240,138,36,0.65)" : undefined,
-                        outline: on ? "1.5px solid var(--orange)" : undefined,
-                        transition: "width 220ms var(--ease-glass), opacity 220ms, box-shadow 220ms",
-                      }}
-                    />
+                      className="flex items-center justify-center"
+                      style={{ height: ROW_H }}
+                    >
+                      <div
+                        className="rounded-[3px]"
+                        style={{
+                          width: `${widthFor(l.areaSqm) * (on ? 1.08 : 1)}%`,
+                          height: l.band === "podium" || l.band === "basement" ? 14 : 10,
+                          background: bandColor[l.band],
+                          opacity: t * (hotLevel && !on ? 0.42 : 1),
+                          transform: `scaleX(${lerp(0.4, 1, t)})`,
+                          boxShadow: on ? "0 0 14px rgba(240,138,36,0.65)" : undefined,
+                          outline: on ? "1.5px solid var(--orange)" : undefined,
+                          transition: "width 220ms var(--ease-glass), opacity 220ms, box-shadow 220ms",
+                        }}
+                      />
+                    </div>
                   );
                 })}
               </div>
@@ -80,8 +90,9 @@ export default function ProgramStack({ progress }: ChapterProps) {
                       key={l.id}
                       onPointerEnter={() => setHotLevel(l.id)}
                       onPointerLeave={() => setHotLevel(null)}
-                      className="flex items-center gap-2.5 rounded-lg px-2 py-[3px]"
+                      className="flex items-center gap-2.5 rounded-lg px-2"
                       style={{
+                        height: ROW_H,
                         opacity: t * (hotLevel && !on ? 0.5 : 1),
                         background: on ? "rgba(240,138,36,0.12)" : undefined,
                         transition: "background 200ms var(--ease-glass), opacity 200ms",
