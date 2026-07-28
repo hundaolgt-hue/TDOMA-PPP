@@ -44,10 +44,30 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
+    // content-visibility: auto (ChapterShell) lets off-screen chapters skip
+    // layout entirely, which is what fixed the scroll jank — but it also
+    // means chapters below the fold sit at their contain-intrinsic-size
+    // placeholder height until first painted. As each one resolves to its
+    // real height while the user scrolls, every later chapter's document
+    // position shifts, and ScrollTrigger's cached start/end pixel values
+    // (computed once at refresh) go stale — so reveals drift out of sync
+    // with the chapter's true on-screen position ("late" animations).
+    // contentvisibilityautostatechange fires on exactly those transitions,
+    // bubbles, and is spec-guaranteed — refresh (debounced, since many
+    // chapters can flip in one scroll frame) keeps trigger math honest.
+    let refreshTimer: ReturnType<typeof setTimeout> | null = null;
+    const onVisibilityStateChange = () => {
+      if (refreshTimer) clearTimeout(refreshTimer);
+      refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 120);
+    };
+    document.addEventListener("contentvisibilityautostatechange", onVisibilityStateChange, true);
+
     return () => {
       gsap.ticker.remove(tick);
       lenis.destroy();
       lenisInstance = null;
+      document.removeEventListener("contentvisibilityautostatechange", onVisibilityStateChange, true);
+      if (refreshTimer) clearTimeout(refreshTimer);
     };
   }, []);
 

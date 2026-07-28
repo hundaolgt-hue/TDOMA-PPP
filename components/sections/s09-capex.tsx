@@ -113,7 +113,7 @@ export default function Capex({ progress }: ChapterProps) {
             ["Input VAT recoverable", "629 M", "refunded Y1"],
             ["Pre-opening & marketing", "120 M", "ETB"],
           ].map(([l, v, s], i) => (
-            <div key={l as string} className="holo p-5" style={{ opacity: win(progress, 0.5 + i * 0.04, 0.66 + i * 0.04) }}>
+            <div key={l as string} className="holo p-5" style={{ opacity: win(progress, 0.42 + i * 0.03, 0.54 + i * 0.03) }}>
               <p className="label text-[var(--green)]">{l}</p>
               <p className="font-display mt-1 text-2xl font-bold tabular-nums text-[var(--green-deep)]">{v}</p>
               <p className="text-sm text-[var(--dim)]">{s}</p>

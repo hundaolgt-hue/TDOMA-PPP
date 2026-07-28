@@ -10,7 +10,7 @@ import { assumptionGroups, assumptionsHeadline, assumptionsFootnote, type Assump
 /** One bold, dashboard-style number tile. Animates on scroll if `fmt` is set
  *  (a single countable value); otherwise renders the static range/text. */
 function NumberTile({ item, progress, start, big }: { item: AssumptionItem; progress: number; start: number; big?: boolean }) {
-  const t = win(progress, start, start + 0.22);
+  const t = win(progress, start, start + 0.16);
   const isPct = item.fmt?.suffix === "%";
   const barPct = isPct ? Math.min(100, item.value.value * 100) : null;
   return (
@@ -18,7 +18,7 @@ function NumberTile({ item, progress, start, big }: { item: AssumptionItem; prog
       <p className="label text-[var(--green)]">{item.label}</p>
       <p className={`font-display mt-1 font-bold tabular-nums text-[var(--green-deep)] ${big ? "text-3xl 2xl:text-4xl" : "text-2xl 2xl:text-3xl"}`}>
         {item.fmt ? (
-          <Counter progress={progress} start={start} end={start + 0.3} value={item.value.value * (item.fmt.mult ?? 1)} decimals={item.fmt.decimals ?? 0} prefix={item.fmt.prefix} suffix={item.fmt.suffix} grouping={item.fmt.grouping ?? true} />
+          <Counter progress={progress} start={start} end={start + 0.16} value={item.value.value * (item.fmt.mult ?? 1)} decimals={item.fmt.decimals ?? 0} prefix={item.fmt.prefix} suffix={item.fmt.suffix} grouping={item.fmt.grouping ?? true} />
         ) : (
           item.display
         )}
