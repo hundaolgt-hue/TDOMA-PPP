@@ -65,11 +65,22 @@ export default function ChapterShell({ id, heightVh, children, ariaLabel, surfac
 
   if (!pin) {
     // Natural-height content section — no clipping, fully readable.
+    // content-visibility: auto skips layout/style/paint entirely while the
+    // section is off-screen, which matters a lot here: each dashboard section
+    // carries dozens of backdrop-filter (glass) panels, and with ~20 sections
+    // always mounted on a single very tall page, the un-skipped compositing
+    // cost of all of them at once is the main source of scroll jank. This is
+    // CSS-only and doesn't affect ScrollTrigger, which only reads the outer
+    // <section>'s own box — never the paint state of its children.
+    // contain-intrinsic-size gives the browser a placeholder size so the
+    // section doesn't collapse to 0 height (and desync ScrollTrigger's
+    // trigger-position math) before it has been painted once.
     return (
       <section
         ref={sectionRef}
         id={id}
         aria-label={ariaLabel}
+        style={{ contentVisibility: "auto", containIntrinsicSize: "auto 900px" } as React.CSSProperties}
         className={`relative flex min-h-screen flex-col justify-center py-[7vh] ${surface ? "section-bg" : ""}`}
       >
         {children(reduced ? 1 : progress)}
