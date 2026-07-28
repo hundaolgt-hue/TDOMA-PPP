@@ -25,6 +25,7 @@ import Capex from "@/components/sections/s09-capex";
 import Revenue from "@/components/sections/s10-revenue";
 import Sensitivity from "@/components/sections/s11-sensitivity";
 import Profitability from "@/components/sections/s12-profitability";
+import Breakeven from "@/components/sections/s12b-breakeven";
 import Gallery from "@/components/sections/s13-gallery";
 import Interior from "@/components/sections/s13b-interior";
 import Final from "@/components/sections/s14-final";
@@ -50,6 +51,7 @@ const sections = [
   [Revenue, "s10", "Revenue", 270, false],
   [Sensitivity, "s11", "Sensitivity analysis", 230, false],
   [Profitability, "s12", "Profitability", 250, false],
+  [Breakeven, "s12b", "Break-even analysis", 230, false],
   [Gallery, "s13", "Gallery", 230, false],
   [Interior, "s13b", "Interior walk-through", 340, true],
   [Final, "s14", "Closing film", 300, true],

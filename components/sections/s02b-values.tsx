@@ -18,7 +18,7 @@ export default function Values({ progress }: ChapterProps) {
           <p className="label text-[var(--orange-text)]">01 · The company · values &amp; track record</p>
           <TextReveal progress={progress} start={0.03} end={0.14}>
             <h2 className="font-display mt-2 text-[clamp(1.9rem,3.8vw,3.8rem)] font-bold leading-tight text-[var(--green-deep)]">
-              Governed by Gadaa principles.
+              TDOMA&apos;s Principles.
             </h2>
           </TextReveal>
           <TextReveal progress={progress} start={0.07} end={0.18}>
